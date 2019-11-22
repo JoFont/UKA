@@ -1,5 +1,5 @@
 # IronHack Project II
-####### By [Diogo](https://github.com/JoFont) & [Sam](https://github.com/svargas-dev)
+###### By [Diogo](https://github.com/JoFont) & [Sam](https://github.com/svargas-dev)
 
 ## Usage
 
