@@ -18,9 +18,9 @@ This project is being developed and mantained by [Diogo Marques](https://github.
 ## Development
 
 ```bash
-    git clone https://github.com/JoFont/ironhack-project-2.git
-    cd ironhack-project-2
-    npm install
+git clone https://github.com/JoFont/ironhack-project-2.git
+cd ironhack-project-2
+npm install
 ```
 To watch for changes and continually rebuild the project:
 
