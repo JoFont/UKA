@@ -2,9 +2,9 @@
 ###### By [Diogo](https://github.com/JoFont) & [Sam](https://github.com/svargas-dev)
 
 <p>
-  <!-- <a href="https://svelte.dev">
-	<img alt="Cybernetically enhanced web apps: Svelte" src="https://sveltejs.github.io/assets/banner.png">
-  </a> -->
+  <a href="https://ironhack-project-2.herokuapp.com/">
+	<img src="https://raw.githubusercontent.com/JoFont/ironhack-project-2/master/readme-image.png" alt="IronHack Project 2: By Diogo Marques & Sam Vargas">
+  </a>
   <a href="https://travis-ci.org/JoFont/ironhack-project-2">
     <img src="https://travis-ci.org/JoFont/ironhack-project-2.svg?branch=master"
          alt="build status">
