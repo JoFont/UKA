@@ -8,6 +8,13 @@
   </a>
 </p>
 
+
+## What is this project?
+
+This is Project 2 for IronHack Web Development Bootcamp in Lisbon.
+This project is being developed and mantained by [Diogo Marques](https://github.com/JoFont) & [Sam Vargas](https://github.com/svargas-dev).
+
+
 ## Development
 
 ```bash
