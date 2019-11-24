@@ -26,6 +26,15 @@ git clone https://github.com/JoFont/ironhack-project-2.git
 cd ironhack-project-2
 npm install
 ```
+
+For the server to run, provide .env file in root directory with the following environment variables:
+
+```bash
+PORT=3000
+MONGODB_URI=mongodb://127.0.0.1:27017/ironhack-project-2
+NODE_ENV=development
+```
+
 To watch for changes and continually rebuild the project:
 
 ```bash
