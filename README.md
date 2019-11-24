@@ -34,14 +34,14 @@ npm run dev
 
 
 ## Resources
-[Express](https://expressjs.com/) - Nodejs Server
-[Handlebars](http://handlebarsjs.com/) - Templating Engine
-[MongoDB](https://docs.mongodb.com/) - NoSQL Database
-[MongoDB Driver](https://mongodb.github.io/node-mongodb-native/) - MondoDB Nodejs Driver
-[Mongoose](https://mongoosejs.com/) - MongoDb Object Modeling for Node
-[Date-fns](https://date-fns.org/) - Date Utilities
-[Bootstrap](https://getbootstrap.com/) - CSS Framework
-[Passport](https://date-fns.org/) - OAuth Nodejs Middleware
-[Axios](https://github.com/axios/axios) - Nodejs HTTP Client
-[Shards](https://designrevision.com/downloads/shards/) - Bootstrap UI Kit
+[Express](https://expressjs.com/) - Nodejs Server  
+[Handlebars](http://handlebarsjs.com/) - Templating Engine  
+[MongoDB](https://docs.mongodb.com/) - NoSQL Database  
+[MongoDB Driver](https://mongodb.github.io/node-mongodb-native/) - MondoDB Nodejs Driver  
+[Mongoose](https://mongoosejs.com/) - MongoDb Object Modeling for Node  
+[Date-fns](https://date-fns.org/) - Date Utilities  
+[Bootstrap](https://getbootstrap.com/) - CSS Framework  
+[Passport](https://date-fns.org/) - OAuth Nodejs Middleware  
+[Axios](https://github.com/axios/axios) - Nodejs HTTP Client  
+[Shards](https://designrevision.com/downloads/shards/) - Bootstrap UI Kit  
 
