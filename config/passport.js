@@ -82,7 +82,7 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
 passport.use("google", new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://www.example.com/auth/google/callback"
+  callbackURL: "/auth/sign-in/google/redirect"
 }, async (accessToken, refreshToken, profile, done) => {
   console.log(profile);
   
