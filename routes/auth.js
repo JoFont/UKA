@@ -1,8 +1,8 @@
 const router = require('express').Router();
 
 
-router.get('/', (req, res, next) => {
-  res.render('auth', { name: 'James Dean' });
+router.get('/sign-up', (req, res, next) => {
+  res.render('auth');
 });
 
 
