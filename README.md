@@ -3,7 +3,7 @@
 	<img src="https://raw.githubusercontent.com/JoFont/ironhack-project-2/master/readme-image.png" alt="IronHack Project 2: By Diogo Marques & Sam Vargas">
   </a>
   <a href="https://travis-ci.org/JoFont/ironhack-project-2">
-    <img src="https://travis-ci.org/JoFont/ironhack-project-2.svg?branch=master"
+    <img src="https://travis-ci.org/JoFont/UKA.svg?branch=master"
          alt="build status">
   </a>
   <a href="https://codeclimate.com/github/JoFont/UKA/maintainability">
