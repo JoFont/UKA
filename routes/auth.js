@@ -13,8 +13,16 @@ router.post('/sign-in/local', passport.authenticate('local', {
 }));
 
 // Sign in with Google
-router.get('/sign-in/google', passport.authenticate('google', { scope: ['profile'] }));
-// router.get('/sign-in/google/redirect', passport.authenticate('google', { scope: ['profile'] }));
+router.get('/sign-in/google', passport.authenticate('google', {
+  scope: ['profile']
+}));
+
+router.get('/sign-in/google/redirect', passport.authenticate('google'), (req, res, next) => {
+  res.redirect("/");
+});
+
+
+
 
 // Sign up
 router.get('/sign-up', (req, res, next) => {

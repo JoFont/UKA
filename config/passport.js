@@ -95,10 +95,10 @@ passport.use("google", new GoogleStrategy({
       const newUser = await User.create({
         displayName: profile.displayName,
         email: profile.email,
-        photoUrl: profile.photoURL,
+        photoUrl: profile.photos[0].value,
         auth: {
           method: "google",
-          uid: profile.uid
+          uid: profile.id
         }
       });
       done(null, newUser);
