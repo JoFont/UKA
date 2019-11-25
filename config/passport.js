@@ -84,9 +84,10 @@ passport.use("google", new GoogleStrategy({
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: "http://www.example.com/auth/google/callback"
 },
-function(accessToken, refreshToken, profile, cb) {
-  User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    return cb(err, user);
-  });
+function(accessToken, refreshToken, profile, done) {
+  done(err, profile)
+  // User.findOrCreate({ email: profile.email }, function (err, user) {
+  //   return cb(err, user);
+  // });
 }
 ));
