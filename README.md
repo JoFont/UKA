@@ -3,11 +3,11 @@
 	<img src="https://raw.githubusercontent.com/JoFont/ironhack-project-2/master/readme-image.png" alt="IronHack Project 2: By Diogo Marques & Sam Vargas">
   </a>
   <a href="https://travis-ci.org/JoFont/ironhack-project-2">
-    <img src="https://travis-ci.org/JoFont/ironhack-project-2.svg?branch=master"
+    <img src="https://travis-ci.org/JoFont/UKA.svg?branch=master"
          alt="build status">
   </a>
-  <a href="https://codeclimate.com/github/JoFont/ironhack-project-2/maintainability">
-    <img src="https://api.codeclimate.com/v1/badges/f938188616060ad540b4/maintainability" />
+  <a href="https://codeclimate.com/github/JoFont/UKA/maintainability">
+    <img src="https://api.codeclimate.com/v1/badges/5d5294f2b14031118bf7/maintainability" />
   </a>
 </p>
 

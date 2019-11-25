@@ -5,18 +5,16 @@ const appId = process.env.EDAMAM_APP_ID;
 const appKey = process.env.EDAMAM_APP_KEY;
 
 router.get('/', async (req, res, next) => {
-    const include = req.query.include;
-    const q = include.split(",").join("+");
-
-    const exclude = req.query.exclude ? req.query.exclude : "";
+    const include = req.query.include.split(",").join("+");
+    const exclude = req.query.exclude ? req.query.exclude.split(",").join("+") : "";
 
     try {
         const response = await axios.get(`https://api.edamam.com/search`, {
             params: {
-                q: q,
+                q: include,
                 app_id: appId,
                 app_key: appKey,
-                exclude: exclude
+                exclude
             }
         });
         res.render("recipes", {recipes: response.data.hits});
