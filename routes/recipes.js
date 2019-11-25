@@ -19,10 +19,9 @@ router.get('/', async (req, res, next) => {
                 exclude: exclude
             }
         });
-        // res.send(response.data);
-        res.render("recipes", {recipes: response.data});
-    } catch {
-
+        res.render("recipes", {recipes: response.data.hits});
+    } catch (error) {
+        res.send(new Error(error))
     }
 
     res.render('recipes', { name: 'James Dean' });
