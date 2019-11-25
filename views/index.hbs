@@ -1,2 +1,9 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="container-fluid">
+  <h1>UKA</h1>
+
+  <form action="/recipes" method="GET">
+    <input type="text" name="include" placeholder="Enter your ingredients..." />
+    <input type="text" name="exlude" placeholder="Excluded ingredients..." />
+    <button>Search</button>
+  </form>
+</div>
