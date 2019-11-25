@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
 
 
-const note = new mongoose.Schema({
+const schema = new mongoose.Schema({
     author: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
+        required: true
+    },
+    recipe: {
+        type: mongoose.Types.ObjectId,
+        ref: "SavedRecipe",
         required: true
     },
     body: {

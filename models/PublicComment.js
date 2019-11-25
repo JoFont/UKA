@@ -6,6 +6,15 @@ const schema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
+  recipe: {
+    type: mongoose.Types.ObjectId,
+    ref: "SavedRecipe",
+    required: true
+  },
+  parentComment: {
+    type: mongoose.Types.ObjectId,
+    ref: "PublicComment"
+  },
   body: {
     type: String,
     required: true,
