@@ -26,7 +26,7 @@ router.post('/sign-up/local', passport.authenticate('local', {
 router.get('/confirm/:token', (req, res, next) => {
   User.findOneAndUpdate({"auth.verificationToken": req.params.token}, {"auth.verified": true})
   .then(user => {
-    res.redirect('/auth/verification-successful')
+    res.redirect('/auth/verified')
   })
   .catch(err => console.log(err));
 });
