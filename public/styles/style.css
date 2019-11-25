@@ -9,6 +9,10 @@ a {
   color: #00b7ff; }
 
 #index {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   /* Use "linear-gradient" to add a darken background effect to the image. This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./../images/index-bg.jpg");
   /* Set a specific height */
@@ -19,8 +23,7 @@ a {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative; }
-
-#index form {
-  color: white; }
+  #index h1, #index form {
+    color: white; }
 
 /*# sourceMappingURL=style.css.map */
