@@ -79,19 +79,6 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
   }
 }));
 
-<<<<<<< HEAD
-// passport.use("google", new GoogleStrategy({
-//   clientID: process.env.GOOGLE_CLIENT_ID,
-//   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-//   callbackURL: "http://www.example.com/auth/google/callback"
-// },
-// function(accessToken, refreshToken, profile, cb) {
-//   User.findOrCreate({ googleId: profile.id }, function (err, user) {
-//     return cb(err, user);
-//   });
-// }
-// ));
-=======
 passport.use("google", new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -120,4 +107,3 @@ passport.use("google", new GoogleStrategy({
     done(error);
   }
 }));
->>>>>>> 0fb0ec44c5b15897a700b5c058fa82a65c1f645e
