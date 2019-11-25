@@ -6,4 +6,7 @@ body {
 a {
   color: #00b7ff; }
 
+#index body {
+  background-image: url("./../images/index-bg.jpg"); }
+
 /*# sourceMappingURL=style.css.map */
