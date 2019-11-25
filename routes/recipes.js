@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
     const include = req.query.include;
     const q = include.split(",").join("+");
 
-    const exclude = req.query.exclude ? req.query.exclude : "";
+    const exclude = req.query.exclude ? req.query.exclude.split(",").join("+") : "";
 
     try {
         const response = await axios.get(`https://api.edamam.com/search`, {
