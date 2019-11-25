@@ -1,8 +1,9 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const bcryptjs = require('bcryptjs');
-const User = require('../models/User');
 const nodemailer = require('./mailer');
+const User = require('../models/User');
 
 // GENERATE RANDOM TOKEN
 const generateId = length => {
@@ -70,3 +71,15 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
     }
   }
 }));
+
+passport.use("google", new GoogleStrategy({
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: "http://www.example.com/auth/google/callback"
+},
+function(accessToken, refreshToken, profile, cb) {
+  User.findOrCreate({ googleId: profile.id }, function (err, user) {
+    return cb(err, user);
+  });
+}
+));
