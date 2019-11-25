@@ -5,6 +5,10 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
 const serveFavicon = require('serve-favicon');
+const expressSession = require('express-session');
+const connectMongo = require('connect-mongo');
+const MongoStore = connectMongo(expressSession);
+
 
 const app = express();
 
@@ -22,6 +26,11 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(join(__dirname, 'public')));
+
+
+
+
+
 
 app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
