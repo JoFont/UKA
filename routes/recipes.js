@@ -22,8 +22,8 @@ router.get('/', async (req, res, next) => {
                 ingr: maxIngr
             }
         });
-        res.send(response.data);
-        // res.render("recipes", {recipes: response.data.hits});
+        // res.send(response.data);
+        res.render("recipes", {recipes: response.data.hits});
     } catch (error) {
         res.send(new Error(error))
     }
