@@ -34,7 +34,14 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
   const user = await User.findOne({ email });
   const token = generateId(32);
   if (user) {
-    done(null, user);
+    const passMatch = await bcryptjs.compare(password, user.passHash);
+    if(passMatch && user.auth.verified) {
+      done(null, user);
+    } else if(passMatch && !user.auth.verified) {
+      done(new Error("Please Verify your account."))
+    } else {
+      done(new Error("Password doesn't match"))
+    }
   } else {
     try {
       const hash = await bcryptjs.hash(password, 10);
