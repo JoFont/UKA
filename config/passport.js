@@ -1,6 +1,5 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const axios = require("axios");
 const bcryptjs = require('bcryptjs');
 const User = require('../models/User');
 const nodemailer = require('./mailer');
@@ -38,10 +37,9 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
   } else {
     try {
       const hash = await bcryptjs.hash(password, 10);
-      const imageResponse = await axios.get(`https://api.adorable.io/avatars/285/${hash}.png`);
       const newUser = await User.create({
         email,
-        photoUrl: imageResponse.data,
+        photoUrl: `https://api.adorable.io/avatars/285/${hash}.png`,
         auth: {
           method: "local",
           passHash: hash,
