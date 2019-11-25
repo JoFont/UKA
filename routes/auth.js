@@ -18,7 +18,7 @@ router.get('/sign-up', (req, res, next) => {
 });
 
 router.post('/sign-up/local', passport.authenticate('local', {
-  successRedirect: '/',
+  successRedirect: '/auth/verify-email',
   failureRedirect: '/sign-up'
 }));
 
@@ -30,5 +30,11 @@ router.get('/confirm/:token', (req, res, next) => {
   })
   .catch(err => console.log(err));
 });
+
+
+router.get('/verify-email', (req, res, next) => {
+  res.render('auth/verify-email');
+});
+
 
 module.exports = router;
