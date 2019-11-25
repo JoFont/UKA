@@ -12,11 +12,7 @@ router.post('/sign-in/local', passport.authenticate('local', {
   failureRedirect: '/sign-in'
 }));
 
-router.post('/sign-in/google', passport.authenticate('google', {
-  successRedirect: '/',
-  failureRedirect: '/sign-in'
-}));
-
+router.get('/sign-in/google', passport.authenticate('google', { scope: ['profile'] }));
 
 // Sign up
 router.get('/sign-up', (req, res, next) => {
