@@ -4,7 +4,7 @@ const passport = require('passport');
 
 // Sign In
 router.get('/sign-in', (req, res, next) => {
-  res.render('sign-in');
+  res.render('auth/sign-in');
 });
 
 router.post('/sign-in/local', passport.authenticate('local', {
@@ -14,7 +14,7 @@ router.post('/sign-in/local', passport.authenticate('local', {
 
 
 router.get('/sign-up', (req, res, next) => {
-  res.render('sign-up');
+  res.render('auth/sign-up');
 });
 
 router.post('/sign-up/local', passport.authenticate('local', {
