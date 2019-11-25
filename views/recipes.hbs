@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="card-columns">
+    {{#each recipes}}
+    <div class="col card">
+      <img src="{{ recipe.image }}" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title">{{ recipe.label }}</h5>
+        <p class="card-text">{{ recipe.source }}</p>
+        <a href="{{ recipe.url }}" class="btn btn-primary">View Recipe</a>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>

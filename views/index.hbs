@@ -1,8 +1,11 @@
+<h1>Ulimate Kitchen Assistant</h1>
 <div id="index" class="container-fluid">
   <h1>UKA</h1>
 
   <form action="/recipes" method="GET">
     <input type="text" name="include" placeholder="Enter your ingredients..." />
+    <label for="strict">Strict</label>
+    <input type="checkbox" id="strict" name="strict" />
     <input type="text" name="exlude" placeholder="Excluded ingredients..." />
     <button>Search</button>
   </form>
