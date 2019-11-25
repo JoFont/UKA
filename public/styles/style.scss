@@ -36,5 +36,26 @@ a {
   position: relative;
   h1, form {
     color: white;
-  }           
+  }
+  h1 {
+    font-size: 5em;
+    padding: 1em;
+  }
+  form {
+    display: flex;
+    align-items: center;
+  }
+  form input {
+    padding: 0.5em;
+    margin: 0.5em;
+    border: 3px solid white;
+    border-radius: 0.2em;
+  }
+  form button {
+    font-weight: 600;
+    padding: 1em;
+  //   margin: 0.5em;
+  //   border: 3px solid white;
+  //   border-radius: 0.2em;
+  }
 }

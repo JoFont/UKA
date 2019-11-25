@@ -1,11 +1,31 @@
+<title>Ulitmate Kitchen Assistant</title>
+
 <div id="index" class="container-fluid">
   <h1>Ulitmate Kitchen Assistant</h1>
 
   <form action="/recipes" method="GET">
     <input type="text" name="include" placeholder="Enter your ingredients..." />
-    <label for="strict">Strict</label>
-    <input type="checkbox" id="strict" name="strict" />
-    <input type="text" name="exlude" placeholder="Excluded ingredients..." />
-    <button>Search</button>
+
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="customCheck1" name="strict">
+      <label class="custom-control-label" for="customCheck1">Only these ingredients</label>
+    </div>
+
+    <input type="text" id="exclude" name="exclude" placeholder="Excluded ingredients..." />
+
+    <button class="btn btn-dark">Search</button>
   </form>
 </div>
+
+<script>
+  document.getElementById("customCheck1").addEventListener("click", hideExcludes);
+
+  function hideExcludes() {
+    const $exclude = document.getElementById("exclude");
+    if ($exclude.style.display === "none") {
+      $exclude.style.display = "flex"
+    } else {
+      $exclude.style.display = "none"
+    }
+  }
+</script>

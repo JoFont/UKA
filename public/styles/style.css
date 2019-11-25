@@ -25,5 +25,19 @@ a {
   position: relative; }
   #index h1, #index form {
     color: white; }
+  #index h1 {
+    font-size: 5em;
+    padding: 1em; }
+  #index form {
+    display: flex;
+    align-items: center; }
+  #index form input {
+    padding: 0.5em;
+    margin: 0.5em;
+    border: 3px solid white;
+    border-radius: 0.2em; }
+  #index form button {
+    font-weight: 600;
+    padding: 1em; }
 
 /*# sourceMappingURL=style.css.map */
