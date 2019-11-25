@@ -12,7 +12,13 @@ router.post('/sign-in/local', passport.authenticate('local', {
   failureRedirect: '/sign-in'
 }));
 
+router.post('/sign-in/google', passport.authenticate('google', {
+  successRedirect: '/',
+  failureRedirect: '/sign-in'
+}));
 
+
+// Sign up
 router.get('/sign-up', (req, res, next) => {
   res.render('auth/sign-up');
 });
@@ -21,6 +27,7 @@ router.post('/sign-up/local', passport.authenticate('local', {
   successRedirect: '/auth/verify-email',
   failureRedirect: '/sign-up'
 }));
+
 
 // CONFIRM EMAIL
 router.get('/confirm/:token', (req, res, next) => {

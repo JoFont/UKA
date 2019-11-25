@@ -83,11 +83,27 @@ passport.use("google", new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: "http://www.example.com/auth/google/callback"
-},
-function(accessToken, refreshToken, profile, done) {
-  done(err, profile)
-  // User.findOrCreate({ email: profile.email }, function (err, user) {
-  //   return cb(err, user);
-  // });
-}
-));
+}, async (accessToken, refreshToken, profile, done) => {
+  console.log(profile);
+  
+  try {
+    const user = await User.findOne({ email: profile.email });
+
+    if(user) {
+      done(null, user);
+    } else {
+      const newUser = await User.create({
+        displayName: profile.displayName,
+        email: profile.email,
+        photoUrl: profile.photoURL,
+        auth: {
+          method: "google",
+          uid: profile.uid
+        }
+      });
+      done(null, newUser);
+    }
+  } catch (error) {
+    done(error);
+  }
+}));
