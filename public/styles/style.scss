@@ -10,3 +10,7 @@ body {
 a {
   color: $link-color;
 }
+
+#index body {
+  background-image: url("./../images/index-bg.jpg");
+}
