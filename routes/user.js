@@ -2,12 +2,13 @@ const router = require('express').Router();
 const routeGuard = require("../middleware/route-guard");
 
 
-router.use(routeGuard());
+router.use(routeGuard);
 
 router.get('/:id/profile', (req, res, next) => {
   res.render('user/profile');
 });
 
+// Complete Profile
 router.get('/:id/complete-profile', (req, res, next) => {
   res.render('user/complete-profile');
 });
