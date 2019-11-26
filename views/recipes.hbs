@@ -7,13 +7,15 @@
         <h5 class="card-title">{{ recipe.label }}</h5>
         <p class="card-text">{{ recipe.source }}</p>
         <a href="{{ recipe.url }}" class="btn btn-primary">View Recipe</a>
-        
 
-        <form action="/recipes/{{ getID recipe.uri }}/save" method="POST">
+        <button class="recipe-bookmark" data-recipe-uri="{{ getID recipe.uri }}"
+          data-recipe-data="{{getData recipe}}">Save</button>
+
+        {{!-- <form action="/recipes/{{ getID recipe.uri }}/save" method="POST">
           <input class="hidden" type="text" name="data" value="{{getData recipe}}" />
           <button>Save</button>
-        </form>
-      
+        </form> --}}
+
       </div>
     </div>
     {{/each}}
@@ -21,5 +23,17 @@
 </div>
 
 <script>
-
+  document.addEventListener('click', e => {
+    const instance = axios.create({
+      baseURL: 'http://localhost:8080'
+    });
+    if (e.target.classList.contains('recipe-bookmark')) {
+      const uri = e.target.dataset.recipeUri;
+      const data = JSON.stringify(e.target.dataset.recipeData);
+      instance.post(`/recipes/${uri}/save`, data);
+    }
+  });
 </script>
+
+
+{{!-- <script src="./../public/js/main"></script> --}}

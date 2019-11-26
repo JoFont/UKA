@@ -43,22 +43,24 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/:recipeID/save', async (req, res, next) => {
-    console.log(JSON.parse(req.body.data));
+    console.log(req.url, req.body);
+    console.log(JSON.parse(req));
     try {
         const recipe = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
         if(recipe && recipe.authors.includes(req.user._id)) {
-            
+            const result = SavedRecipe.updateOne({ recipeID: req.params.recipeID },  { $pull: { authors: req.user._id }})
         } else {
-            console.log(req.user);
             const newSavedRecipe = new SavedRecipe({
                 recipeID: req.params.recipeID,
-                data: JSON.parse(req.body.data),
+                data: JSON.parse(req.body),
             });
 
             await newSavedRecipe.authors.addToSet({_id: req.user._id});
             await newSavedRecipe.save();
 
-            res.send(newSavedRecipe);
+            res.send({
+                saved: true,
+            });
         }
     } catch (error) {
         next(error);
