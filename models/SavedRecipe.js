@@ -1,22 +1,15 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
+    author: [{
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+        required: true
+    }],
     data: {
         type: Map,
         required: true
-    },
-    notes: {
-        type: [{
-            type: mongoose.Types.ObjectId,
-            ref: "PrivateNote"
-        }]
-    },
-    comments: {
-        type: [{
-            type: mongoose.Types.ObjectId,
-            ref: "PublicComment"
-        }]
-    },
+    }
 },
 {
     timestamps: true
