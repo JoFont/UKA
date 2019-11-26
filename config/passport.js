@@ -87,14 +87,14 @@ passport.use("google", new GoogleStrategy({
   console.log(profile);
   
   try {
-    const user = await User.findOne({ email: profile.email });
+    const user = await User.findOne({ email: profile.emails[0].value });
 
     if(user) {
       done(null, user);
     } else {
       const newUser = await User.create({
         displayName: profile.displayName,
-        email: profile.email,
+        email: profile.emails[0].value,
         photoUrl: profile.photos[0].value,
         auth: {
           method: "google",
