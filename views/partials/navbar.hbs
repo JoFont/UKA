@@ -19,6 +19,13 @@
       <li class="nav-item">
         <a class="nav-link" href="/auth/sign-up">Sign Up</a>
       </li>
+      {{#if user}}
+        <li class="nav-item">
+          <a class="nav-link" href="/user/{{user._id}}/profile">
+            <img src={{user.photoUrl}} alt="User Photo">
+          </a>
+        </li>
+      {{/if}}
     </ul>
   </div>
 </nav>
