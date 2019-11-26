@@ -29,4 +29,8 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.post('/:id/:data/save', (req, res, next) => {
+    res.send({ id, data });
+})
+
 module.exports = router;
