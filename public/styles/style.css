@@ -8,7 +8,7 @@ body {
 a {
   color: #00b7ff; }
 
-#index {
+#index, .fs-bg {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,20 +23,22 @@ a {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative; }
-  #index h1, #index form {
-    color: white; }
-  #index h1 {
+  #index h1, #index h2, #index form, .fs-bg h1, .fs-bg h2, .fs-bg form {
+    color: white;
+    line-height: 1em; }
+  #index h1, .fs-bg h1 {
     font-size: 5em;
     padding: 1em; }
-  #index form {
+  #index .auth-form, .fs-bg .auth-form {
     display: flex;
+    flex-direction: column;
     align-items: center; }
-  #index form input {
+  #index form input, .fs-bg form input {
     padding: 0.5em;
     margin: 0.5em;
     border: 3px solid white;
     border-radius: 0.2em; }
-  #index form button {
+  #index form button, .fs-bg form button {
     font-weight: 600;
     padding: 1em; }
 
