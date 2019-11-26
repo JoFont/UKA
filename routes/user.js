@@ -1,10 +1,9 @@
 const router = require('express').Router();
-const routeGuard = require("../middleware/route-guard");
+const routeGuard = require("./../middleware/route-guard");
 
 
-router.use(routeGuard());
-
-router.get('/:id/profile', (req, res, next) => {
+router.get('/:id/profile', routeGuard, (req, res, next) => {
+  // router.use(routeGuard());
   res.render('user/profile');
 });
 
