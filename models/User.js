@@ -10,7 +10,7 @@ const schema = new mongoose.Schema({
     default: null
   },
   auth: {
-    type: Map,
+    type: mongoose.Schema.Types.Mixed,
     required: true
   },
   email: {

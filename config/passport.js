@@ -34,13 +34,18 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
   const user = await User.findOne({ email });
   const token = generateId(32);
   if (user) {
-    const passMatch = await bcryptjs.compare(password, user.passHash);
-    if(passMatch && user.auth.verified) {
-      done(null, user);
-    } else if(passMatch && !user.auth.verified) {
-      done(new Error("Please Verify your account."))
-    } else {
-      done(new Error("Password doesn't match"))
+    try {
+      const passMatch = await bcryptjs.compare(password, user.auth.passHash);
+      console.log("PASS MATCH: ", passMatch)
+      if(passMatch && user.auth.verified) {
+        done(null, user);
+      } else if(passMatch && !user.auth.verified) {
+        done(new Error("Please Verify your account."))
+      } else {
+        done(new Error("Password doesn't match"))
+      }
+    } catch (error){
+      done(error);
     }
   } else {
     try {
@@ -65,7 +70,7 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
         html: `
         <h1>Welcome to UKA</h1>
         <p>
-          <a href="http://localhost:3000/auth/confirm/${token}/">
+          <a href="http://localhost:3000/auth/confirm/${token}">
             Click here
           </a>
           to confirm your email address
