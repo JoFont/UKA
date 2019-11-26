@@ -8,7 +8,7 @@
         <p class="card-text">{{ recipe.source }}</p>
         <a href="{{ recipe.url }}" class="btn btn-primary">View Recipe</a>
 
-        <button class="recipe-bookmark" data-recipe-uri="{{ getID recipe.uri }}"
+        <button class="recipe-bookmark btn btn-secondary" data-recipe-uri="{{ getID recipe.uri }}"
           data-recipe-data="{{getData recipe}}">Save</button>
 
         {{!-- <form action="/recipes/{{ getID recipe.uri }}/save" method="POST">
@@ -24,20 +24,24 @@
 
 <script>
   document.addEventListener('click', e => {
-    const instance = axios.create({
-      baseURL: 'http://localhost:8080'
-    });
     if (e.target.classList.contains('recipe-bookmark')) {
       const uri = e.target.dataset.recipeUri;
       const data = e.target.dataset.recipeData;
 
       axios.post(`/recipes/${uri}/save`, {data: data}).then(res => {
+        const data = res.data;
+        if(data.status === 200 && data.saved) {
+          e.target.classList.remove("btn-secondary");
+          e.target.innerText = "Saved";
+          e.target.classList.add("btn-warning");
+        } else if (data.status === 200 && !data.saved) {
+          e.target.classList.remove("btn-warning");
+          e.target.innerText = "Save";
+          e.target.classList.add("btn-secondary");
+        }
         console.log(res.data);
-      })
+      });
     
     }
   });
 </script>
-
-
-{{!-- <script src="./../public/js/main"></script> --}}
