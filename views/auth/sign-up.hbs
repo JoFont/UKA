@@ -27,8 +27,8 @@
             <span class="google-button__text">Sign in with Google</span>
           </button>
         </form>
-        {{!-- EMAIL SIGN UP --}}
 
+        {{!-- EMAIL SIGN UP --}}
         <form action="/auth/sign-up/local" method="POST" class="auth-form" id="sign-up-local">
           <div class="form-group">
             <label>Email</label>
@@ -57,22 +57,22 @@
 
 
 <script>
+  // Form Validation using Pristine JS
   window.onload = function () {
-
       const form = document.getElementById("sign-up-local");
       // create the pristine instance
       const pristine = new Pristine(form);
       const password = document.getElementById("sign-up-local-password");
       const passwordConfirm = document.getElementById("sign-up-local-password-confirm");
 
-      // A validator to check if the first letter is capitalized
+      // A validator to check if the password matches the confirm password
       pristine.addValidator(passwordConfirm, value => {
           // here `this` refers to the respective input element
           if (value === password.value){
               return true;
           }
           return false;
-      }, "pass doesnt match", 2, false);
+      }, "Passwords don't match.", 2, false);
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
