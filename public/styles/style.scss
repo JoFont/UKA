@@ -91,18 +91,22 @@ a {
   }
 }
 
-.sign-up-container {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  padding: 2em;
-  margin: 2em;
-  .sign-up {
-    flex-direction: column;
-    form {
-      flex-direction: column;
-    }
-  }
+// .sign-up-container {
+//   display: flex;
+//   justify-content: center;
+//   align-content: center;
+//   padding: 2em;
+//   margin: 2em;
+//   .sign-up {
+//     flex-direction: column;
+//     form {
+//       flex-direction: column;
+//     }
+//   }
+// }
+
+.sign-up {
+  margin: 4em;
 }
 
 .google-button__icon {

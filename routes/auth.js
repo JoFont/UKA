@@ -49,9 +49,6 @@ router.get('/confirm/:token', (req, res, next) => {
   .catch(err => console.log(err));
 });
 
-// Complete Profile
-
-
 
 //! SIGN OUT
 router.post("/sign-out", (req, res, next) => {
