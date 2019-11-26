@@ -30,7 +30,6 @@
     if (e.target.classList.contains('recipe-bookmark')) {
       const uri = e.target.dataset.recipeUri;
       const data = e.target.dataset.recipeData;
-      {{!-- console.log(cenas); --}}
 
       axios.post(`/recipes/${uri}/save`, {data: data}).then(res => {
         console.log(res.data);

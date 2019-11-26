@@ -45,9 +45,14 @@ router.get('/', async (req, res, next) => {
 router.post('/:recipeID/save', async (req, res, next) => {
     try {
         const recipe = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
+
         if(recipe && recipe.authors.includes(req.user._id)) {
             // TODO: This as well
-            const result = SavedRecipe.updateOne({ recipeID: req.params.recipeID },  { $pull: { authors: req.user._id }})
+            const result = await SavedRecipe.updateOne({ recipeID: req.params.recipeID },  { $pull: { authors: req.user._id }});
+            if(result) res.send({ saved: false });
+        } else if (recipe && !recipe.authors.includes(req.user._id)) {
+            const result = await SavedRecipe.updateOne({ recipeID: req.params.recipeID },  { $push: { authors: req.user._id }});
+            if(result) res.send({ saved: true });
         } else {
             const newSavedRecipe = new SavedRecipe({
                 recipeID: req.params.recipeID,
@@ -57,9 +62,7 @@ router.post('/:recipeID/save', async (req, res, next) => {
             await newSavedRecipe.authors.addToSet({_id: req.user._id});
             await newSavedRecipe.save();
 
-            res.send({
-                saved: true,
-            });
+            res.send({ saved: true });
         }
     } catch (error) {
         next(error);
