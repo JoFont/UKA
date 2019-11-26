@@ -51,8 +51,10 @@ router.get('/confirm/:token', (req, res, next) => {
 
 
 //! SIGN OUT
-router.post("/sign-out", (req, res, next) => {
-  // TODO: SIGN USER OUT
+router.get("/sign-out", (req, res, next) => {
+  // destroy the session
+  req.session.destroy();
+  res.redirect('/');
 });
 
 

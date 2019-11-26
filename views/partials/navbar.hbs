@@ -13,17 +13,21 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav w-100 d-inline-flex align-items-center">
-      <li class="nav-item">
-        <a class="nav-link" href="/auth/sign-in">Sign In</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/auth/sign-up">Sign Up</a>
-      </li>
       {{#if user}}
         <li class="nav-item ml-lg-auto">
+          <a class="nav-link" href="/auth/sign-out">Sign Out</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/user/{{user._id}}/profile">
             <img src={{user.photoUrl}} class="profile-pic border border-primary" alt="User Photo">
           </a>
+        </li>
+      {{else}}
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/sign-in">Sign In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/auth/sign-up">Sign Up</a>
         </li>
       {{/if}}
     </ul>
