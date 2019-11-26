@@ -30,7 +30,7 @@
     if (e.target.classList.contains('recipe-bookmark')) {
       const uri = e.target.dataset.recipeUri;
       const cenas = JSON.stringify(e.target.dataset.recipeData);
-      console.log(cenas);
+      {{!-- console.log(cenas); --}}
 
 
       async function postData(url = '', data = {}) {
@@ -51,7 +51,7 @@
         return await response.json(); // parses JSON response into native JavaScript objects
       }
       
-      postData(`/recipes/${uri}/save`, cenas)
+      postData(`/recipes/${uri}/save`, {test: "Hellors"}).then(res => console.log(res))
     
     }
   });
