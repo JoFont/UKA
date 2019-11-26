@@ -61,9 +61,6 @@ a {
     box-shadow: none;
     transition-duration: 10ms; }
 
-.sign-up {
-  margin: 4em; }
-
 .google-button__icon {
   display: inline-block;
   vertical-align: middle;
@@ -87,10 +84,18 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center; }
-  .search input, .search div {
-    margin: 1em; }
+  .search div {
+    margin: 1em;
+    padding: 0.25em; }
+  .search input {
+    padding: 0.5em;
+    border: 0.3em solid white;
+    border-radius: 0.3em; }
+  .search label {
+    margin-left: 1.5em; }
   .search button {
-    margin: 2em; }
+    margin: 2em;
+    margin-top: 5em; }
 
 .bg-purple {
   background-color: #d3d0d8; }
