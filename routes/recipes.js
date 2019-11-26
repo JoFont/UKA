@@ -26,13 +26,30 @@ router.get('/', async (req, res, next) => {
 
         const results = [];
         
-        //! Removes weird Data in Results
+        //! Formats Data
+        // This checkes if there are saved results in the DB
+
+        const savedRecipes = req.user ? await SavedRecipe.find({ "authors": { "$in": [req.user._id] } }) : [];
+
         response.data.hits.forEach(hit => {
             if(hit.recipe.totalNutrients["SUGAR.added"]) {
                 const addedSugar = hit.recipe.totalNutrients["SUGAR.added"];
                 delete hit.recipe.totalNutrients["SUGAR.added"];
                 hit.recipe.totalNutrients.addedSugar = addedSugar;
             }
+
+            // This Iterates over The saved items and adds state to response
+            // TODO: Check if is possible to do this whole operation in mongoDB
+            if(savedRecipes.length) {
+                savedRecipes.forEach(item => {
+                    if(hit.recipe.uri.split("recipe_")[1] === item.recipeID) {
+                        hit.recipe.isSaved = true;
+                    }
+                });
+            } else {
+                hit.recipe.isSaved = false;
+            }
+
             results.push(hit);
         });
 

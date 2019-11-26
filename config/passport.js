@@ -36,7 +36,6 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
   if (user) {
     try {
       const passMatch = await bcryptjs.compare(password, user.auth.passHash);
-      console.log("PASS MATCH: ", passMatch)
       if(passMatch && user.auth.verified) {
         done(null, user);
       } else if(passMatch && !user.auth.verified) {
@@ -89,8 +88,6 @@ passport.use("google", new GoogleStrategy({
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: "/auth/sign-in/google/redirect"
 }, async (accessToken, refreshToken, profile, done) => {
-  console.log(profile);
-  
   try {
     const user = await User.findOne({ email: profile.emails[0].value });
 
