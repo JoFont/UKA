@@ -48,6 +48,7 @@ router.post('/:recipeID/save', async (req, res, next) => {
     try {
         const recipe = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
         if(recipe && recipe.authors.includes(req.user._id)) {
+            // TODO: This as well
             const result = SavedRecipe.updateOne({ recipeID: req.params.recipeID },  { $pull: { authors: req.user._id }})
         } else {
             const newSavedRecipe = new SavedRecipe({
