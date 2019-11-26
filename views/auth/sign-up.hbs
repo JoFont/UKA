@@ -28,15 +28,21 @@
           </button>
         </form>
         {{!-- EMAIL SIGN UP --}}
-        <form action="/auth/sign-up/local" method="POST" class="auth-form">
+
+        <form action="/auth/sign-up/local" method="POST" class="auth-form" id="sign-up-local">
           <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" class="form-control" placeholder="Enter email address" />
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" placeholder="Enter email address" required/>
           </div>
 
           <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" />
+            <label>Password</label>
+            <input type="password" id="sign-up-local-password" name="password" class="form-control" required/>
+          </div>
+
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" id="sign-up-local-password-confirm" name="confirm-password" class="form-control" required/>
           </div>
 
           <button class="btn btn-dark">Submit</button>
@@ -47,3 +53,32 @@
 
   </div>
 </div>
+
+
+
+<script>
+  window.onload = function () {
+
+      const form = document.getElementById("sign-up-local");
+      // create the pristine instance
+      const pristine = new Pristine(form);
+      const password = document.getElementById("sign-up-local-password");
+      const passwordConfirm = document.getElementById("sign-up-local-password-confirm");
+
+      // A validator to check if the first letter is capitalized
+      pristine.addValidator(passwordConfirm, value => {
+          // here `this` refers to the respective input element
+          if (value === password.value){
+              return true;
+          }
+          return false;
+      }, "pass doesnt match", 2, false);
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        // check if the form is valid
+        const valid = pristine.validate(); // returns true or false
+        if(valid) e.target.submit();
+      });
+  };
+</script>
