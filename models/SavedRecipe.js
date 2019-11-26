@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    author: [{
+    recipeID: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    authors: [{
         type: mongoose.Types.ObjectId,
         ref: "User",
         required: true
