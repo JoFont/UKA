@@ -33,14 +33,14 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center; }
-  #index form input, .fs-bg form input {
-    padding: 0.5em;
-    margin: 0.5em;
-    border: 3px solid white;
-    border-radius: 0.2em; }
+  #index form, .fs-bg form {
+    margin: 1.5em 0; }
   #index form button, .fs-bg form button {
     font-weight: 600;
-    padding: 1em; }
+    margin: 1em 0.5em; }
+  #index .card-title, .fs-bg .card-title {
+    text-align: center;
+    font-size: 2em; }
 
 .google-button {
   height: 40px;
@@ -82,5 +82,17 @@ a {
   font-size: 14px;
   font-weight: bold;
   font-family: 'Roboto',arial,sans-serif; }
+
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .search input, .search div {
+    margin: 1em; }
+  .search button {
+    margin: 2em; }
+
+.bg-purple {
+  background-color: #d3d0d8; }
 
 /*# sourceMappingURL=style.css.map */
