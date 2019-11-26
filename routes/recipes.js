@@ -23,15 +23,46 @@ router.get('/', async (req, res, next) => {
                 ingr: maxIngr
             }
         });
-        // res.send(response.data);
-        res.render("recipes", {recipes: response.data.hits});
+
+        const results = [];
+        
+        //! Removes weird Data in Results
+        response.data.hits.forEach(hit => {
+            if(hit.recipe.totalNutrients["SUGAR.added"]) {
+                const addedSugar = hit.recipe.totalNutrients["SUGAR.added"];
+                delete hit.recipe.totalNutrients["SUGAR.added"];
+                hit.recipe.totalNutrients.addedSugar = addedSugar;
+            }
+            results.push(hit);
+        });
+
+        res.render("recipes", {recipes: results});
     } catch (error) {
         res.send(new Error(error))
     }
 });
 
-router.post('/:id/:data/save', (req, res, next) => {
-    res.send({ id, data });
-})
+router.post('/:recipeID/save', async (req, res, next) => {
+    console.log(JSON.parse(req.body.data));
+    try {
+        const recipe = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
+        if(recipe && recipe.authors.includes(req.user._id)) {
+            
+        } else {
+            console.log(req.user);
+            const newSavedRecipe = new SavedRecipe({
+                recipeID: req.params.recipeID,
+                data: JSON.parse(req.body.data),
+            });
+
+            await newSavedRecipe.authors.addToSet({_id: req.user._id});
+            await newSavedRecipe.save();
+
+            res.send(newSavedRecipe);
+        }
+    } catch (error) {
+        next(error);
+    } 
+});
 
 module.exports = router;

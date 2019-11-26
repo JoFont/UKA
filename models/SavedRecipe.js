@@ -12,7 +12,7 @@ const schema = new mongoose.Schema({
         required: true
     }],
     data: {
-        type: Map,
+        type: mongoose.Schema.Types.Mixed,
         required: true
     }
 },

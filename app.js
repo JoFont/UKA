@@ -16,10 +16,15 @@ const app = express();
 app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(join(__dirname, '/views/partials'));
-hbs.registerHelper("getURL", function(data) {
-  const id = data.uri.split('recipe_')[1];
+// TODO: Move helpers
+hbs.registerHelper("getID", function (uri) {
+  const id = uri.split('recipe_')[1];
+  // const dataStr = JSON.stringify(data);
+  return `${id}`;
+})
+hbs.registerHelper("getData", function (data) {
   const dataStr = JSON.stringify(data);
-  return `/recipes/${id}/${dataStr}/save`;
+  return `${dataStr}`;
 })
 
 app.use(logger('dev'));

@@ -7,11 +7,19 @@
         <h5 class="card-title">{{ recipe.label }}</h5>
         <p class="card-text">{{ recipe.source }}</p>
         <a href="{{ recipe.url }}" class="btn btn-primary">View Recipe</a>
-        <form action="{{ getURL recipe }}" method="POST">
+        
+
+        <form action="/recipes/{{ getID recipe.uri }}/save" method="POST">
+          <input class="hidden" type="text" name="data" value="{{getData recipe}}" />
           <button>Save</button>
         </form>
+      
       </div>
     </div>
     {{/each}}
   </div>
 </div>
+
+<script>
+
+</script>
