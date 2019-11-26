@@ -16,6 +16,11 @@ const app = express();
 app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(join(__dirname, '/views/partials'));
+hbs.registerHelper("getURL", function(data) {
+  const id = data.uri.split('recipe_')[1];
+  const dataStr = JSON.stringify(data);
+  return `/recipes/${id}/${dataStr}/save`;
+})
 
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: true }));
@@ -28,6 +33,7 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(join(__dirname, 'public')));
+
 
 app.use(expressSession({
   secret: process.env.SESSION_SECRET,

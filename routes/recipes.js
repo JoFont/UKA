@@ -30,33 +30,8 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.post("/:id/:data/save", async (req, res, next) => {
-    const recipeID = req.params.id.split("recipe_")[1];
-    res.send({
-        id: req.params.id,
-        recipe: req.params.data
-    });
-    // if(req.user) {
-    //     try {
-    //         const recipe = await SavedRecipe.findOne({ recipeID });
-    //         if(recipe && recipe.authors.includes(req.user._id)) {
-    //             SavedRecipe.findOneAndUpdate({ recipeID }, { $pull: { _id: req.user._id }})
-    //         } else if (recipe && !recipe.authors.includes(req.user._id)) {
-
-    //         } else {
-    //             SavedRecipe.create({
-    //                 $push: { authors: req.user._id },
-    //                 data: 
-    //             })
-    //         }
-    //     }
-    // }
-});
-
+router.post('/:id/:data/save', (req, res, next) => {
+    res.send({ id, data });
+})
 
 module.exports = router;
-
-// db.books.update(
-//     { _id: 1 },
-//     { $push: { isbns: '1239jasdf' } }
-//  )

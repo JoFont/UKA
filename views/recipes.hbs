@@ -7,7 +7,7 @@
         <h5 class="card-title">{{ recipe.label }}</h5>
         <p class="card-text">{{ recipe.source }}</p>
         <a href="{{ recipe.url }}" class="btn btn-primary">View Recipe</a>
-        <form action="/{{ recipe.uri }}/{{ recipe.recipe }}/save/" method="POST">
+        <form action="{{ getURL recipe }}" method="POST">
           <button>Save</button>
         </form>
       </div>
