@@ -16,6 +16,7 @@ const app = express();
 app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(join(__dirname, '/views/partials'));
+
 // TODO: Move helpers
 hbs.registerHelper("getID", function (uri) {
   const id = uri.split('recipe_')[1];
@@ -28,6 +29,7 @@ hbs.registerHelper("getData", function (data) {
 })
 
 app.use(logger('dev'));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(serveFavicon(join(__dirname, 'public/images', 'favicon.ico')));
