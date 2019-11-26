@@ -8,7 +8,7 @@
         <h5 class="card-title">Sign Up</h5>
         {{!-- GOOGLE SIGN UP --}}
         <form action="/auth/sign-in/google" method="GET">
-          <button class="google-button">
+          <button class="google-button" style="margin: 0;">
             <span class="google-button__icon">
               <svg viewBox="0 0 366 372" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -28,6 +28,8 @@
           </button>
         </form>
 
+        <hr class="hr-text" data-content="OR">
+
         {{!-- EMAIL SIGN UP --}}
         <form action="/auth/sign-up/local" method="POST" class="auth-form" id="sign-up-local">
           <div class="form-group">
@@ -45,7 +47,7 @@
             <input type="password" id="sign-up-local-password-confirm" name="confirm-password" class="form-control" required/>
           </div>
 
-          <button class="btn btn-dark">Submit</button>
+          <button class="btn btn-dark">Sign Up</button>
         </form>
 
       </div>
