@@ -59,6 +59,9 @@ a {
     box-shadow: none;
     transition-duration: 10ms; }
 
+.sign-up {
+  margin: 4em; }
+
 .google-button__icon {
   display: inline-block;
   vertical-align: middle;

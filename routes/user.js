@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const routeGuard = require("../middleware/route-guard");
+const routeGuard = require("./../middleware/route-guard");
 
 
 router.use(routeGuard);
