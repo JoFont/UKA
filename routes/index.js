@@ -6,7 +6,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get("/test", (req, res, next) => {
-  res.render("auth/verify-email");
+  res.render("user/complete-profile");
 });
 
 module.exports = router;
