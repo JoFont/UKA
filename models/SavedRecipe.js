@@ -11,6 +11,10 @@ const schema = new mongoose.Schema({
         ref: "User",
         required: true
     }],
+    count: {
+        type: Number,
+        min: 0
+    },
     data: {
         type: mongoose.Schema.Types.Mixed,
         required: true

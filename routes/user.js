@@ -2,6 +2,7 @@ const router = require('express').Router();
 const routeGuard = require("./../middleware/route-guard");
 const fileUploader = require("../config/file-upload");
 const User = require("../models/User");
+const SavedRecipe = require("../models/SavedRecipe");
 
 // Complete Profile
 router.get('/:id/complete-profile', (req, res, next) => {
@@ -34,8 +35,11 @@ router.post("/:id/profile-is-complete", fileUploader.single('uploaded-file'), as
 // Routeguard
 router.use(routeGuard);
 
-router.get('/:id/profile', (req, res, next) => {
-  res.render('user/profile');
+router.get('/:id/profile', async (req, res, next) => {
+  const savedRecipes = await SavedRecipe.find({ "authors": { "$in": [req.user._id] } });
+  res.render('user/profile', {
+    savedRecipes
+  });
 });
 
 router.get('/:id', (req, res, next) => {

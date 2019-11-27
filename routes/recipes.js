@@ -72,15 +72,16 @@ router.post('/:recipeID/save', async (req, res, next) => {
         const recipe = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
 
         if(recipe && recipe.authors.includes(req.user._id)) {
-            const result = await SavedRecipe.updateOne({ recipeID: req.params.recipeID },  { $pull: { authors: req.user._id }});
+            const result = await SavedRecipe.updateOne({ recipeID: req.params.recipeID }, { $pull: { authors: req.user._id }, $inc: { count: -1}});
             if(result) res.send({ status: 200, saved: false });
         } else if (recipe && !recipe.authors.includes(req.user._id)) {
-            const result = await SavedRecipe.updateOne({ recipeID: req.params.recipeID },  { $push: { authors: req.user._id }});
+            const result = await SavedRecipe.updateOne({ recipeID: req.params.recipeID },  { $push: { authors: req.user._id }, $inc: { count: 1}});
             if(result) res.send({ status: 200, saved: true });
         } else {
             const newSavedRecipe = new SavedRecipe({
                 recipeID: req.params.recipeID,
                 data: JSON.parse(req.body.data),
+                count: 1
             });
 
             await newSavedRecipe.authors.addToSet({_id: req.user._id});
