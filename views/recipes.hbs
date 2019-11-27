@@ -1,4 +1,75 @@
 <div class="container">
+  <form id="recipe-search" class="w-100 mt-3" action="/recipes" method="GET">
+    <div class="w-100 d-flex flex-row justisfy-content-between align-items-center">
+      <input type="text" class="border rounded w-50 mr-3 p-2" name="include" placeholder="Enter your ingredients..." />
+
+      <div class="custom-control custom-checkbox m-3">
+        <input type="checkbox" class="custom-control-input" id="customCheck1" name="strict" />
+        <label class="custom-control-label" for="customCheck1">Only these ingredients</label>
+      </div>
+
+      <button class="btn btn-dark m-3">Search</button>
+
+      {{!-- ADVANCED SEARCH --}}
+      <a class="ml-3" data-toggle="collapse" href="#advanced" role="button" aria-expanded="false"
+        aria-controls="collapseExample">
+        Advanced</a>
+    </div>
+
+    <div class="collapse card card-body w-100" id="advanced">
+      <div class="col">
+        <div class="form-group">
+          <label for="max-ingredients">Maximum number of ingredients</label>
+          <input type="number" id="max-ingredients" name="max-ingredients"/>
+        </div>
+        <div class="form-group">
+          <label for="cuisine">Cuisine</label>
+          <select multiple class="form-control" name="cuisine" id="cuisine">
+            <option value="American">American</option>
+            <option value="Asian">Asian</option>
+            <option value="British">British</option>
+            <option value="Caribbean">Caribbean</option>
+            <option value="Central Europe">Central Europe</option>
+            <option value="Chinese">Central Europe</option>
+            <option value="Eastern Europe">Eastern Europe</option>
+            <option value="French">French</option>
+            <option value="Indian">Indian</option>
+            <option value="Italian">Italian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Kosher">Kosher</option>
+            <option value="Mediterranean">Mediterranean</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Middle Eastern">Middle Eastern</option>
+            <option value="Nordic">Nordic</option>
+            <option value="South American">South American</option>
+            <option value="South East Asian">South East Asian</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          {{!-- <p class="font-weight-bold">Dietary restrictions</p> --}}
+          <div>
+            <input type="checkbox" id="alcohol-free" value="alcohol-free" name="restrictions" />
+            <label for="alcohol-free">Alcohol-free</label>
+            <input type="checkbox" id="celery-free" value="celery-free"name="restrictions" />
+            <label for="celery-free">Celery-free</label>
+            <input type="checkbox" id="crustacean-free" value="crustacean-free" name="restrictions" />
+            <label for="crustacean-free">Crustacean-free</label>
+            <input type="checkbox" id="dairy-free" value="dairy-free" name="restrictions" />
+            <label for="dairy-free">Dairy-free</label>
+
+          </div>
+
+        </div>
+          {{!-- <li>Dietary restrictions</li>
+          <li>Exclude</li> --}}
+      
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="container">
   <div class="card-columns mt-5">
     {{#each recipes}}
     <div class="col card">
@@ -7,20 +78,20 @@
         <h5 class="card-title">{{ recipe.label }}</h5>
         <p class="card-text">{{ recipe.source }}</p>
         {{!-- <div class="d-flex flex-row"> --}}
-          {{!-- NEED TO SEND DATA & CHANGE PAGE SO FORM...--}}
-          <form action="/recipes/{{ getID recipe.uri }}" method="POST" class="d-inline">
-            <input class="hidden" type="text" name="data" value="{{getData recipe}}" />
-            <button class="btn btn-primary">View Recipe</button>
-          </form>
-          {{!-- <a href="/recipes/{{ getID recipe.uri }}" class="btn btn-primary">View Recipe</a> --}}
+        {{!-- NEED TO SEND DATA & CHANGE PAGE SO FORM...--}}
+        <form action="/recipes/{{ getID recipe.uri }}" method="POST" class="d-inline">
+          <input class="hidden" type="text" name="data" value="{{getData recipe}}" />
+          <button class="btn btn-primary">View Recipe</button>
+        </form>
+        {{!-- <a href="/recipes/{{ getID recipe.uri }}" class="btn btn-primary">View Recipe</a> --}}
 
-          {{#if recipe.isSaved}}
-          <button class="recipe-bookmark btn btn-warning ml-auto d-inline-block" data-recipe-uri="{{ getID recipe.uri }}"
-            data-recipe-data="{{getData recipe}}">Saved</button>
-          {{else}}
-          <button class="recipe-bookmark btn btn-secondary ml-auto d-inline-block" data-recipe-uri="{{ getID recipe.uri }}"
-            data-recipe-data="{{getData recipe}}">Save</button>
-          {{/if}}
+        {{#if recipe.isSaved}}
+        <button class="recipe-bookmark btn btn-warning ml-auto d-inline-block" data-recipe-uri="{{ getID recipe.uri }}"
+          data-recipe-data="{{getData recipe}}">Saved</button>
+        {{else}}
+        <button class="recipe-bookmark btn btn-secondary ml-auto d-inline-block"
+          data-recipe-uri="{{ getID recipe.uri }}" data-recipe-data="{{getData recipe}}">Save</button>
+        {{/if}}
         {{!-- </div> --}}
       </div>
     </div>
@@ -31,7 +102,7 @@
 <script>
   document.addEventListener('click', e => {
     if (e.target.classList.contains('recipe-bookmark')) {
-      {{!-- console.log(e.target); --}}
+      { { !--console.log(e.target); --} }
       //JSON - change value - stringify -
       const uri = e.target.dataset.recipeUri;
       const data = e.target.dataset.recipeData;
@@ -41,7 +112,7 @@
         if (data.status === 200 && data.saved) {
           const dataTmp = JSON.parse(e.target.dataset.recipeData);
           dataTmp.isSaved = true;
-          {{!-- console.dir(dataTmp); --}}
+          { { !--console.dir(dataTmp); --} }
           e.target.setAttribute("data-recipe-data", JSON.stringify(dataTmp));
           console.log(e.target);
           e.target.classList.remove("btn-secondary");
@@ -55,7 +126,7 @@
           e.target.innerText = "Save";
           e.target.classList.add("btn-secondary");
         }
-        {{!-- console.log(res.data); --}}
+        { { !--console.log(res.data); --} }
       });
 
     }
