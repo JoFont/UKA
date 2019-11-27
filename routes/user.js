@@ -4,7 +4,6 @@ const fileUploader = require("../config/file-upload");
 const User = require("../models/User");
 
 // Complete Profile
-// FIXME: ZÉ, AJUDA, NÃO TENHO REQ.USER NO SITIO CERTO
 router.get('/:id/complete-profile', (req, res, next) => {
   if(req.user._id == req.params.id) {
     res.render('user/complete-profile');
