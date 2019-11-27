@@ -72,8 +72,8 @@
 <div class="container">
   <div class="card-columns mt-5">
     {{#each recipes}}
-    <div class="col card">
-      <img src="{{ recipe.image }}" class="card-img-top" alt="">
+    <div class="card">
+      <img src="{{ recipe.image }}" class="card-img-top" alt="" style="max-height: 200px; object-fit: cover;">
       <div class="card-body">
         <h5 class="card-title">{{ recipe.label }}</h5>
         <p class="card-text">{{ recipe.source }}</p>
@@ -102,7 +102,6 @@
 <script>
   document.addEventListener('click', e => {
     if (e.target.classList.contains('recipe-bookmark')) {
-      { { !--console.log(e.target); --} }
       //JSON - change value - stringify -
       const uri = e.target.dataset.recipeUri;
       const data = e.target.dataset.recipeData;
@@ -112,9 +111,7 @@
         if (data.status === 200 && data.saved) {
           const dataTmp = JSON.parse(e.target.dataset.recipeData);
           dataTmp.isSaved = true;
-          { { !--console.dir(dataTmp); --} }
           e.target.setAttribute("data-recipe-data", JSON.stringify(dataTmp));
-          console.log(e.target);
           e.target.classList.remove("btn-secondary");
           e.target.innerText = "Saved";
           e.target.classList.add("btn-warning");
@@ -126,9 +123,7 @@
           e.target.innerText = "Save";
           e.target.classList.add("btn-secondary");
         }
-        { { !--console.log(res.data); --} }
       });
-
     }
   });
 </script>

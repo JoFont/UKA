@@ -42,6 +42,13 @@ router.get('/:id/profile', async (req, res, next) => {
   });
 });
 
+router.post("/unsave-recipe/:recipeID", async (req, res, next) => {
+  const result = await SavedRecipe.updateOne({ recipeID: req.params.recipeID }, { $pull: { authors: req.user._id }, $inc: { count: -1}});
+  if(result) {
+    res.redirect(`/user/${req.user._id}/profile`);
+  }
+});
+
 router.get('/:id', (req, res, next) => {
   res.redirect(`/user/${req.user}/profile`);
 });
