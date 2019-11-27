@@ -63,7 +63,7 @@ router.post('/:recipeID', async (req, res, next) => {
   // const recipe = await (req.params.recipeID);
   // console.dir(req.body.data);
   const data = await JSON.parse(req.body.data);
-  console.log(data);
+//   console.log(data);
   res.render('recipe-single', { recipe: data });
 });
 

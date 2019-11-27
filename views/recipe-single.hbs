@@ -2,7 +2,7 @@
 
 <div class="card bg-light w-75 mx-auto m-5">
   {{!-- <div class="card-header">{{ label }}</div> --}}
-  <img src="{{ image }}" class="card-img-top" alt="...">
+  <img src="{{ image }}" class="card-img-top p-5" alt="...">
   <div class="card-body text-wrap">
     <h5 class="card-title mb-5">{{ label }}</h5>
     <p class="card-text">
@@ -16,15 +16,59 @@
       <ul>
         <li>{{yield}}</li>
       </ul>
+      <ul class="list-group mb-3 w-25 mx-auto text-wrap">
+        {{#each healthLabels}}
+        <li class="list-group-item list-group-item-success text-center">{{ this }}</li>
+        {{/each}}
+      </ul>
+
+      <a class="btn btn-primary" target="_blank" href="{{url}}">View Recipe <span
+          class="fa fa-external-link"></span></a>
+
+      {{#if isSaved}}
+      <button class="recipe-bookmark btn btn-warning" data-recipe-uri="{{ getID uri }}"
+        data-recipe-data="{{getData this}}">Saved</button>
+      {{else}}
+      <button class="recipe-bookmark btn btn-secondary" data-recipe-uri="{{ getID uri }}"
+        data-recipe-data="{{getData this}}">Save</button>
+      {{/if}}
     </p>
-    
+
   </div>
 </div>
 
-
-{{!-- <h1>{{ label }}</h1>
-<img src="{{ image }}" alt="" /> --}}
-
-
-
 {{/with}}
+
+
+<script>
+  document.addEventListener('click', e => {
+    if (e.target.classList.contains('recipe-bookmark')) {
+      {{!-- console.dir(e.target); --}}
+      //JSON - change value - stringify -
+      const uri = e.target.dataset.recipeUri;
+      const data = e.target.dataset.recipeData;
+      {{!-- console.dir(dataTmp); --}}
+
+      axios.post(`/recipes/${uri}/save`, { data: data }).then(res => {
+        const data = res.data;
+        if (data.status === 200 && data.saved) {
+          const dataTmp = JSON.parse(e.target.dataset.recipeData);
+          dataTmp.isSaved = true;
+          e.target.dataset.recipeData = JSON.stringify(dataTmp);
+          e.target.classList.remove("btn-secondary");
+          e.target.innerText = "Saved";
+          e.target.classList.add("btn-warning");
+        } else if (data.status === 200 && !data.saved) {
+          const dataTmp = JSON.parse(e.target.dataset.recipeData);
+          dataTmp.isSaved = false;
+          e.target.dataset.recipeData = JSON.stringify(dataTmp);
+          e.target.classList.remove("btn-warning");
+          e.target.innerText = "Save";
+          e.target.classList.add("btn-secondary");
+        }
+        {{!-- console.log(res.data); --}}
+      });
+
+    }
+  });
+</script>

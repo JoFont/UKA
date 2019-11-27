@@ -6,20 +6,22 @@
       <div class="card-body">
         <h5 class="card-title">{{ recipe.label }}</h5>
         <p class="card-text">{{ recipe.source }}</p>
-        {{!-- NEED TO SEND DATA & CHANGE PAGE SO FORM...--}}
-        <form action="/recipes/{{ getID recipe.uri }}" method="POST">
-          <input class="hidden" type="text" name="data" value="{{getData recipe}}" />
-          <button>View Recipe</button>
-        </form>
-        {{!-- <a href="/recipes/{{ getID recipe.uri }}" class="btn btn-primary">View Recipe</a> --}}
+        <div class="d-flex flex-row">
+          {{!-- NEED TO SEND DATA & CHANGE PAGE SO FORM...--}}
+          <form action="/recipes/{{ getID recipe.uri }}" method="POST">
+            <input class="hidden" type="text" name="data" value="{{getData recipe}}" />
+            <button class="btn btn-primary mr-5">View Recipe</button>
+          </form>
+          {{!-- <a href="/recipes/{{ getID recipe.uri }}" class="btn btn-primary">View Recipe</a> --}}
 
-        {{#if recipe.isSaved}}
+          {{#if recipe.isSaved}}
           <button class="recipe-bookmark btn btn-warning" data-recipe-uri="{{ getID recipe.uri }}"
             data-recipe-data="{{getData recipe}}">Saved</button>
-        {{else}}
+          {{else}}
           <button class="recipe-bookmark btn btn-secondary" data-recipe-uri="{{ getID recipe.uri }}"
             data-recipe-data="{{getData recipe}}">Save</button>
-        {{/if}}
+          {{/if}}
+        </div>
       </div>
     </div>
     {{/each}}
@@ -29,23 +31,33 @@
 <script>
   document.addEventListener('click', e => {
     if (e.target.classList.contains('recipe-bookmark')) {
+      {{!-- console.log(e.target); --}}
+      //JSON - change value - stringify -
       const uri = e.target.dataset.recipeUri;
       const data = e.target.dataset.recipeData;
 
-      axios.post(`/recipes/${uri}/save`, {data: data}).then(res => {
+      axios.post(`/recipes/${uri}/save`, { data: data }).then(res => {
         const data = res.data;
-        if(data.status === 200 && data.saved) {
+        if (data.status === 200 && data.saved) {
+          const dataTmp = JSON.parse(e.target.dataset.recipeData);
+          dataTmp.isSaved = true;
+          {{!-- console.dir(dataTmp); --}}
+          e.target.setAttribute("data-recipe-data", JSON.stringify(dataTmp));
+          console.log(e.target);
           e.target.classList.remove("btn-secondary");
           e.target.innerText = "Saved";
           e.target.classList.add("btn-warning");
         } else if (data.status === 200 && !data.saved) {
+          const dataTmp = JSON.parse(e.target.dataset.recipeData);
+          dataTmp.isSaved = false;
+          e.target.dataset.recipeData = JSON.stringify(dataTmp);
           e.target.classList.remove("btn-warning");
           e.target.innerText = "Save";
           e.target.classList.add("btn-secondary");
         }
-        console.log(res.data);
+        {{!-- console.log(res.data); --}}
       });
-    
+
     }
   });
 </script>
