@@ -59,6 +59,14 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.post('/:recipeID', async (req, res, next) => {
+  // const recipe = await (req.params.recipeID);
+  // console.dir(req.body.data);
+  const data = await JSON.parse(req.body.data);
+//   console.log(data);
+  res.render('recipe-single', { recipe: data });
+});
+
 router.post('/:recipeID/save', async (req, res, next) => {
     try {
         const recipe = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
@@ -84,5 +92,7 @@ router.post('/:recipeID/save', async (req, res, next) => {
         next(error);
     } 
 });
+
+
 
 module.exports = router;
