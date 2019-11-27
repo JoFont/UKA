@@ -3,7 +3,12 @@ const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const bcryptjs = require('bcryptjs');
 const nodemailer = require('./mailer');
+const fs = require('fs');
+const handlebars = require('handlebars');
 const User = require('../models/User');
+
+//attach the plugin to the nodemailer transporter
+
 
 // GENERATE RANDOM TOKEN
 const generateId = length => {
@@ -30,20 +35,28 @@ passport.deserializeUser((id, callback) => {
     });
 });
 
+const renderTemplate = (path, data) => {
+  const source = fs.readFileSync(path, 'utf8');
+  const template = handlebars.compile(source);
+  const result = template(data);
+  return result;
+}
+
+
 passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
   const user = await User.findOne({ email });
   const token = generateId(32);
   if (user) {
     try {
       const passMatch = await bcryptjs.compare(password, user.auth.passHash);
-      if(passMatch && user.auth.verified) {
+      if (passMatch && user.auth.verified) {
         done(null, user);
-      } else if(passMatch && !user.auth.verified) {
+      } else if (passMatch && !user.auth.verified) {
         done(new Error("Please Verify your account."))
       } else {
         done(new Error("Password doesn't match"))
       }
-    } catch (error){
+    } catch (error) {
       done(error);
     }
   } else {
@@ -59,23 +72,19 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
           verificationToken: token
         }
       });
-      await nodemailer.sendMail({
+
+      // TODO: I WAS HERE
+      const htmlEmail = renderTemplate(__dirname + "/mail/verify-email.hbs", {newUser, token});
+      nodemailer.sendMail({
         from: `"Ultimate Kitchen Assistant" <${process.env.EMAIL_USER}>`,
         to: `${email}`, 
         subject: 'UKA - Confirm Your Email', 
         text: `Welcome to UKA. Go to 
         http://localhost:3000/auth/confirm/${token} 
         to confirm your email address`,
-        html: `
-        <h1>Welcome to UKA</h1>
-        <p>
-          <a href="http://localhost:3000/auth/confirm/${token}">
-            Click here
-          </a>
-          to confirm your email address
-        </p>
-        `
+        html: htmlEmail
       });
+      
       done(null, newUser);
     } catch (err) {
       done(err);
@@ -91,7 +100,7 @@ passport.use("google", new GoogleStrategy({
   try {
     const user = await User.findOne({ email: profile.emails[0].value });
 
-    if(user) {
+    if (user) {
       done(null, user);
     } else {
       const newUser = await User.create({
