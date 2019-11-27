@@ -6,7 +6,12 @@
       <div class="card-body">
         <h5 class="card-title">{{ recipe.label }}</h5>
         <p class="card-text">{{ recipe.source }}</p>
-        <a href="{{ recipe.url }}" class="btn btn-primary">View Recipe</a>
+        {{!-- NEED TO SEND DATA & CHANGE PAGE SO FORM...--}}
+        <form action="/recipes/{{ getID recipe.uri }}" method="POST">
+          <input class="hidden" type="text" name="data" value="{{getData recipe}}" />
+          <button>View Recipe</button>
+        </form>
+        {{!-- <a href="/recipes/{{ getID recipe.uri }}" class="btn btn-primary">View Recipe</a> --}}
 
         {{#if recipe.isSaved}}
           <button class="recipe-bookmark btn btn-warning" data-recipe-uri="{{ getID recipe.uri }}"

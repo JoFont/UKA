@@ -1,0 +1,30 @@
+{{#with recipe}}
+
+<div class="card bg-light w-75 mx-auto m-5">
+  {{!-- <div class="card-header">{{ label }}</div> --}}
+  <img src="{{ image }}" class="card-img-top" alt="...">
+  <div class="card-body text-wrap">
+    <h5 class="card-title mb-5">{{ label }}</h5>
+    <p class="card-text">
+      <span class="font-weight-bold">Ingredients</span>
+      <ul>
+        {{#each ingredients}}
+        <li>{{text}}</li>
+        {{/each}}
+      </ul>
+      <span class="font-weight-bold">Portions</span> <br />
+      <ul>
+        <li>{{yield}}</li>
+      </ul>
+    </p>
+    
+  </div>
+</div>
+
+
+{{!-- <h1>{{ label }}</h1>
+<img src="{{ image }}" alt="" /> --}}
+
+
+
+{{/with}}
