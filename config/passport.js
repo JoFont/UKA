@@ -75,11 +75,11 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
       });
 
       // Send Email
-      const htmlEmail = renderTemplate(__dirname + "/mail/verify-email.hbs", {newUser, token});
+      const htmlEmail = renderTemplate(__dirname + "/mail/verify-email.hbs", { newUser, token });
       nodemailer.sendMail({
         from: `"Ultimate Kitchen Assistant" <${process.env.EMAIL_USER}>`,
-        to: `${email}`, 
-        subject: 'UKA - Confirm Your Email', 
+        to: `${email}`,
+        subject: 'UKA - Confirm Your Email',
         text: `Welcome to UKA. Go to 
         http://localhost:3000/auth/confirm/${token} 
         to confirm your email address`,
@@ -87,6 +87,9 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
       });
 
       done(null, newUser);
+      //console.log(newUser)
+      //req.session.user = newUser._id;
+      //console.log(req.session.user);
     } catch (err) {
       done(err);
     }

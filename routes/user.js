@@ -5,19 +5,27 @@ const User = require("../models/User");
 
 // Complete Profile
 router.get('/:id/complete-profile', (req, res, next) => {
-  if(req.user._id === req.params.id) {
+  if(req.user._id == req.params.id) {
     res.render('user/complete-profile');
   } else {
-    next(new Error("Oops!"));
+    next(new Error("Oops! Se há odido algo, macho!"));
   }
 });
 
 router.post("/:id/profile-is-complete", fileUploader.single('uploaded-file'), async (req, res, next) => {
-  const photoUrl = req.file.url;
-  const result = await User.findOneAndUpdate({_id: req.params.id}, {
-    displayName: req.body.displayName,
-    photoUrl
-  });
+  if(req.file) {
+    const splitPhotoUrl = req.file.url.split("upload");
+    // Cropping the image on URL
+    const photoUrl =  `${splitPhotoUrl[0]}upload/w_500,h_500,c_crop${splitPhotoUrl[1]}`;
+    const result = await User.findOneAndUpdate({_id: req.params.id}, {
+      displayName: req.body.displayName,
+      photoUrl
+    });
+  } else {
+    const result = await User.findOneAndUpdate({_id: req.params.id}, {
+      displayName: req.body.displayName
+    });
+  }
   
   res.redirect("/");
 });

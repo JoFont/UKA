@@ -48,7 +48,7 @@ app.use(expressSession({
   saveUninitialized: false,
   cookie: {
     maxAge: 60 * 60 * 24 * 15,
-    sameSite: true,
+    sameSite: "lax",
     httpOnly: true,
     secure: process.env.NODE_ENV !== 'development'
   },
