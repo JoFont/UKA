@@ -18,8 +18,52 @@
 
     <div class="collapse card card-body w-100" id="advanced">
       <div class="col">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
-        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        <div class="form-group">
+          <label for="max-ingredients">Maximum number of ingredients</label>
+          <input type="number" id="max-ingredients" name="max-ingredients"/>
+        </div>
+        <div class="form-group">
+          <label for="cuisine">Cuisine</label>
+          <select multiple class="form-control" name="cuisine" id="cuisine">
+            <option value="American">American</option>
+            <option value="Asian">Asian</option>
+            <option value="British">British</option>
+            <option value="Caribbean">Caribbean</option>
+            <option value="Central Europe">Central Europe</option>
+            <option value="Chinese">Central Europe</option>
+            <option value="Eastern Europe">Eastern Europe</option>
+            <option value="French">French</option>
+            <option value="Indian">Indian</option>
+            <option value="Italian">Italian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Kosher">Kosher</option>
+            <option value="Mediterranean">Mediterranean</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Middle Eastern">Middle Eastern</option>
+            <option value="Nordic">Nordic</option>
+            <option value="South American">South American</option>
+            <option value="South East Asian">South East Asian</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          {{!-- <p class="font-weight-bold">Dietary restrictions</p> --}}
+          <div>
+            <input type="checkbox" id="alcohol-free" value="alcohol-free" name="restrictions" />
+            <label for="alcohol-free">Alcohol-free</label>
+            <input type="checkbox" id="celery-free" value="celery-free"name="restrictions" />
+            <label for="celery-free">Celery-free</label>
+            <input type="checkbox" id="crustacean-free" value="crustacean-free" name="restrictions" />
+            <label for="crustacean-free">Crustacean-free</label>
+            <input type="checkbox" id="dairy-free" value="dairy-free" name="restrictions" />
+            <label for="dairy-free">Dairy-free</label>
+
+          </div>
+
+        </div>
+          {{!-- <li>Dietary restrictions</li>
+          <li>Exclude</li> --}}
+      
       </div>
     </div>
   </form>
