@@ -62,9 +62,10 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
   } else {
     try {
       const hash = await bcryptjs.hash(password, 10);
+      const photoToken = email.split('.')[0];
       const newUser = await User.create({
         email,
-        photoUrl: `https://api.adorable.io/avatars/285/${hash}.png`,
+        photoUrl: `https://api.adorable.io/avatars/285/${photoToken}.png`,
         auth: {
           method: "local",
           passHash: hash,
@@ -73,7 +74,7 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
         }
       });
 
-      // TODO: I WAS HERE
+      // Send Email
       const htmlEmail = renderTemplate(__dirname + "/mail/verify-email.hbs", {newUser, token});
       nodemailer.sendMail({
         from: `"Ultimate Kitchen Assistant" <${process.env.EMAIL_USER}>`,
@@ -84,7 +85,7 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
         to confirm your email address`,
         html: htmlEmail
       });
-      
+
       done(null, newUser);
     } catch (err) {
       done(err);
