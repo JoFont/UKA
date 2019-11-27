@@ -4,7 +4,7 @@
 {{!-- I Was Doing this --}}
 
 <div class="container-fluid d-flex justify-content-center">
-    <form class="mx-auto mt-5" action="/user/{{user._id}}/profile-is-complete" enctype="multipart/form-data">
+    <form class="mx-auto mt-5" action="/user/{{user._id}}/profile-is-complete" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label>Display Name</label>
             <input type="text" class="form-control" name="displayName" id="complete-display-name" required>
