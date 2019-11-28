@@ -34,29 +34,54 @@
       {{/if}}
     </p>
 
-  </div>
-
 
   {{#if user}}
-    <div class="social-actions">
+    <h4>Private Notes</h4>
+    <div class="social-actions-comments">
+      <button type="button" class="btn btn-primary new-private-note" data-recipe-uri="{{ getID recipe.uri }}" data-recipe-data="{{getData recipe }}">New Private Note</button>
+    </div>
+
+    <div class="notes-container">
+      {{#each notes }}
+        <div class="media mb-2">
+          <img src="{{this.author.photoUrl}}" class="mr-3 rounded-circle" alt="..." style="max-width: 40px;">
+          <div class="media-body">
+            <h5 class="mt-0 mb-0">{{this.author.displayName}}</h5>
+            {{this.body}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+
+
+    <h4>Comments</h4>
+    <div class="social-actions-comments">
       <button type="button" class="btn btn-primary new-comment" data-recipe-uri="{{ getID recipe.uri }}" data-recipe-data="{{getData recipe }}">New Comment</button>
     </div>
+    <div class="comments-container">
+      {{#each comments}}
+        <div class="media mb-2">
+          <img src="{{this.author.photoUrl}}" class="mr-3 rounded-circle" alt="..." style="max-width: 40px;">
+          <div class="media-body">
+            <h5 class="mt-0 mb-0">{{this.author.displayName}}</h5>
+            {{this.body}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    
+
+
   {{else}}
     Please Sign In to Comment
   {{/if}}
-
-
-  <div class="comments-container">
-    {{#each comments}}
-      <div class="media mb-2">
-        <img src="{{this.author.photoUrl}}" class="mr-3 rounded-circle" alt="..." style="max-width: 40px;">
-        <div class="media-body">
-          <h5 class="mt-0 mb-0">{{this.author.displayName}}</h5>
-          {{this.body}}
-        </div>
-      </div>
-    {{/each}}
   </div>
+
+
+  
+
+
+  
 
 </div>
 
@@ -66,6 +91,7 @@
 
 <script>
   document.addEventListener('click', e => {
+    // Bookmark Recipe
     if (e.target.classList.contains('recipe-bookmark')) {
       //JSON - change value - stringify -
       const uri = e.target.dataset.recipeUri;
@@ -89,6 +115,7 @@
           e.target.classList.add("btn-secondary");
         }
       });
+      // New Comment
     } else if(e.target.classList.contains("new-comment")) {
 
         const uri = e.target.dataset.recipeUri;
@@ -109,8 +136,6 @@
 
       axios.post(`/recipes/${uri}/comment/new`, { data: data }).then(res => {
         const data = res.data;
-        console.log(data);
-
         if (data.status === 200) {
           const $comment = document.createElement("div");
           $comment.classList.add("media", "mb-2");
@@ -131,6 +156,47 @@
     } else if (e.target.classList.contains("cancel-comment")) {
       const $prevForm = document.querySelector(".comment-form");
       e.target.parentNode.parentNode.removeChild($prevForm);
+
+      //NEW PRIVATE NOTE
+    } else if(e.target.classList.contains("new-private-note")) {
+
+      const uri = e.target.dataset.recipeUri;
+      const $noteForm = document.createElement("div");
+      $noteForm.classList.add("form-group", "note-form");
+      $noteForm.innerHTML = `
+        <textarea class="form-control" name="body" id="" cols="30" rows="3"></textarea>
+        <button class="btn btn-primary submit-note" id="noteTo_${uri}">Save</button>
+        <button class="btn btn-dark cancel-note">Cancel</button>
+      `;
+      e.target.parentNode.append($noteForm);
+
+    } else if(e.target.classList.contains("submit-note")) {
+
+      const uri = e.target.id.split("_")[1]; 
+      const data = {
+        body: e.target.previousElementSibling.value,
+      }
+
+      axios.post(`/recipes/${uri}/private-note/new`, { data: data }).then(res => {
+        const data = res.data;
+
+        if (data.status === 200) {
+          const $note = document.createElement("div");
+          $note.classList.add("media", "mb-2");
+          $note.innerHTML = `
+            <img src="${data.newNote.author.photoUrl}" class="mr-3 rounded-circle" alt="..." style="max-width: 40px;">
+            <div class="media-body">
+              <h5 class="mt-0 mb-0">${data.newNote.author.displayName}</h5>
+              ${data.newNote.body}
+            </div>
+          `;
+          const $noteContainer = document.querySelector(".notes-container");
+          $noteContainer.prepend($note);
+        } 
+
+        const $prevForm = document.querySelector(".note-form");
+        e.target.parentNode.parentNode.removeChild($prevForm);
+      });
     }
   });
 

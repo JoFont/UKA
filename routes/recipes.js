@@ -64,17 +64,22 @@ router.get('/', async (req, res, next) => {
 router.post('/:recipeID', async (req, res, next) => {
   // const recipe = await (req.params.recipeID);
   // console.dir(req.body.data);
-  const data = await JSON.parse(req.body.data);
+    const data = await JSON.parse(req.body.data);
 
-  const isRecipeSaved = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
+    let comments = await Comment.find({ recipe: req.params.recipeID }).populate("author");
 
-    if(isRecipeSaved) {
-        const comments = await Comment.find({ recipe: isRecipeSaved._id }).populate("author").populate("parentComment");
-        res.render('recipe-single', { recipe: data, comments: comments});
-    } else {
-        const comments = [];
-        res.render('recipe-single', { recipe: data, comments: comments});
+    let note = [];
+
+    if(req.user) {
+        notes = await PrivateNote.find({ recipe: req.params.recipeID, author: req.user._id }).populate("author");
+        if(notes === null) notes = [];
     } 
+
+    if(comments === null) {
+        comments = []
+    }
+
+    res.render('recipe-single', { recipe: data, comments: comments, notes: notes});
 });
 
 router.post('/:recipeID/save', async (req, res, next) => {
@@ -125,5 +130,24 @@ router.post('/:recipeID/comment/new', async (req, res, next) => {
     } 
 });
 
+router.post('/:recipeID/private-note/new', async (req, res, next) => {
+    try {
+        const note = await PrivateNote.create({
+            author: req.user._id,
+            recipe: req.params.recipeID,
+            body: req.body.data.body
+        })
+
+        const newNote = await PrivateNote.findOne({ _id: note._id}).populate("author");
+
+        res.send({
+            status: 200,
+            newNote
+        });
+        
+    } catch (error) {
+        next(error);
+    } 
+});
 
 module.exports = router;
