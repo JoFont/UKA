@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const axios = require('axios');
-const SavedRecipe = require("../models/SavedRecipe")
+const SavedRecipe = require("../models/SavedRecipe");
+const Comment = require("../models/PublicComment");
 
 const appId = process.env.EDAMAM_APP_ID;
 const appKey = process.env.EDAMAM_APP_KEY;
@@ -63,8 +64,17 @@ router.post('/:recipeID', async (req, res, next) => {
   // const recipe = await (req.params.recipeID);
   // console.dir(req.body.data);
   const data = await JSON.parse(req.body.data);
-//   console.log(data);
-  res.render('recipe-single', { recipe: data });
+
+  const isRecipeSaved = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
+
+    if(isRecipeSaved) {
+        const comments = await Comment.find({ recipe: isRecipeSaved._id }).populate("author").populate("parentComment");
+        console.log(comments);
+        res.render('recipe-single', { recipe: data, comments: comments});
+    } else {
+        const comments = [];
+        res.render('recipe-single', { recipe: data, comments: comments});
+    } 
 });
 
 router.post('/:recipeID/save', async (req, res, next) => {
@@ -89,6 +99,48 @@ router.post('/:recipeID/save', async (req, res, next) => {
 
             res.send({ status: 200, saved: true });
         }
+    } catch (error) {
+        next(error);
+    } 
+});
+
+
+router.post('/:recipeID/comment/new', async (req, res, next) => {
+    try {
+        const recipe = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
+
+        if(recipe) {
+            const comment = await Comment.create({
+                author: req.user._id,
+                recipe: recipe._id,
+                body: req.body.body
+            });
+    
+            res.send({
+                status: 200,
+                comment
+            });
+        } else {
+            const newSavedRecipe = new SavedRecipe({
+                recipeID: req.params.recipeID,
+                data: JSON.parse(req.body.data),
+                count: 1
+            });
+
+            if(newSavedRecipe) {
+                const comment = await Comment.create({
+                    author: req.user._id,
+                    recipe: recipe._id,
+                    body: req.body.body
+                });
+        
+                res.send({
+                    status: 200,
+                    comment
+                });
+            }
+        }
+        
     } catch (error) {
         next(error);
     } 

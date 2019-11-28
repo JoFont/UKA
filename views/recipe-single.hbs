@@ -1,10 +1,11 @@
-{{#with recipe}}
 
-<div class="card bg-light w-75 mx-auto m-5">
+
+<div class="card bg-light w-75 mx-auto m-5 shadow-none">
   {{!-- <div class="card-header">{{ label }}</div> --}}
-  <img src="{{ image }}" class="card-img-top p-5" alt="...">
+  {{#with recipe}}
+  <img src="{{ image }}" class="card-img-top" alt="..." style="max-height: 200px; object-fit: cover;">
   <div class="card-body text-wrap">
-    <h5 class="card-title mb-5">{{ label }}</h5>
+    <h3 class="card-title mb-5">{{ label }}</h3>
     <p class="card-text">
       <span class="font-weight-bold">Ingredients</span>
       <ul>
@@ -27,7 +28,7 @@
 
       {{#if isSaved}}
       <button class="recipe-bookmark btn btn-warning" data-recipe-uri="{{ getID uri }}"
-        data-recipe-data="{{getData this}}">Saved</button>
+        data-recipe-data="{{getData this}}" id="btn-recipe-uri">Saved</button>
       {{else}}
       <button class="recipe-bookmark btn btn-secondary" data-recipe-uri="{{ getID uri }}"
         data-recipe-data="{{getData this}}">Save</button>
@@ -35,9 +36,42 @@
     </p>
 
   </div>
+
+    
+    {{#if user}}
+      <form action="/recipes/{{ getID uri }}/comment/new" method="POST">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Comment</label>
+          <input hidden type="text" value="{{getData this}}" name="data">
+          <textarea class="form-control" name="body" id="" cols="30" rows="3"></textarea>
+        </div>
+        <button class="btn btn-primary">Submit</button>
+      </form>
+      {{else}}
+      Please Sign In to Comment
+    {{/if}}
+
+  {{/with}}
+
+  <div class="comments-container">
+    {{#each comments}}
+      <div class="media mb-2">
+        <img src="{{this.author.photoUrl}}" class="mr-3 rounded-circle" alt="..." style="max-width: 40px;">
+        <div class="media-body">
+          <h5 class="mt-0 mb-0">{{this.author.displayName}}</h5>
+          {{this.body}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
 </div>
 
-{{/with}}
+
+
+
+
+
 
 
 <script>
@@ -71,4 +105,5 @@
 
     }
   });
+
 </script>
