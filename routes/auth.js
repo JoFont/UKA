@@ -10,7 +10,7 @@ router.get('/sign-in', (req, res, next) => {
 
 router.post('/sign-in/local', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/sign-in'
+  failureRedirect: '/auth/sign-in'
 }));
 
 // Sign in with Google
@@ -33,7 +33,7 @@ router.get('/sign-up', (req, res, next) => {
 
 router.post('/sign-up/local', passport.authenticate('local', {
   successRedirect: '/auth/verify-email',
-  failureRedirect: '/sign-up'
+  failureRedirect: '/auth/sign-up'
 }));
 
 // Verify Email
