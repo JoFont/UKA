@@ -1,6 +1,6 @@
 <div class="container">
   <form id="recipe-search" class="w-100 mt-3" action="/recipes" method="GET">
-    <div class="w-100 d-flex flex-row justisfy-content-between align-items-center">
+    <div class="w-100 d-flex flex-row flex-wrap justisfy-content-between align-items-center">
       <input type="text" class="border rounded w-50 mr-3 p-2" name="include" placeholder="Enter your ingredients..." required />
 
       <div class="custom-control custom-checkbox m-3">
@@ -8,7 +8,7 @@
         <label class="custom-control-label" for="customCheck1">Only these ingredients</label>
       </div>
 
-      <button class="btn btn-dark m-3">Search</button>
+      <button class="btn btn-dark btn-green m-3">Search</button>
 
       {{!-- ADVANCED SEARCH --}}
       <a class="ml-3" data-toggle="collapse" href="#advanced" role="button" aria-expanded="false"
