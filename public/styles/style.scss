@@ -23,6 +23,12 @@ a {
   margin: 0.1em 0.5em;
 }
 
+@media (min-width: 1280px) and (orientation: landscape) { 
+  .navbar {
+    max-height: 3.5em;
+  }
+}
+
 .btn-green {
   background-color: #5cb85c;
   border-color: #5cb85c;
@@ -207,10 +213,10 @@ a {
   display: none;
 }
 
-// #recipe-search {
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: space-around;
-  // align-items: center;
-  // justify-content: center;
-// }
+.recipe .card-title {
+  font-family: 'Libre Baskerville', serif;
+}
+
+.recipe .card-body {
+  font-family: 'Source Sans Pro', sans-serif;
+}

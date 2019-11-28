@@ -1,78 +1,82 @@
+<div class="card w-75 mx-auto m-5 shadow-none recipe">
+  <div class="row justify-content-center">
+    <img src="{{ recipe.image }}" class="col-md-4 p-0 m-0 ml-3 mr-3 mt-5 float-left" alt="..."
+      style="max-height: 200px; object-fit: cover; border: 0.16em solid rgba(230, 232, 230, 0.4); border-radius: 0.75em;">
+    <div class="col-md-7">
+      <h3 class="card-title p-2 pl-5 mt-5 mb-4">{{ recipe.label }}</h3>
+      {{#if recipe.totalTime}}
+      <span class="pl-5 pt-5 mt-5 font-weight-bold">Total time: {{recipe.totalTime}} minutes</span>
+      {{/if}}
 
-
-<div class="card w-75 mx-auto m-5 shadow-none">
-  <div class="row">
-    <img src="{{ recipe.image }}" class="col-4 m-0 mt-5 float-left" alt="..." style="max-height: 200px; object-fit: cover;">
-    <h3 class="card-title col-8 mt-5">{{ recipe.label }}</h3>
-
-
+      {{#if recipe.yield}}
+      <span class="pl-5 pt-5 mt-5 font-weight-bold">Servings: {{recipe.yield}}</span>
+      {{/if}}
+    </div>
   </div>
   <div class="card-body text-wrap">
     <p class="card-text">
-      <span class="font-weight-bold">Ingredients</span>
-      <ul>
-        {{#each recipe.ingredients}}
-        <li>{{text}}</li>
-        {{/each}}
-      </ul>
-      
-      {{#if recipe.yield}}
-        <span class="font-weight-bold">Portions</span> <br />
-        <ul>
-          <li>{{recipe.yield}}</li>
-        </ul>
-      {{/if}}
-      
-      {{#if recipe.totalTime}}
-        <span class="font-weight-bold">Total time</span> <br />
-        <ul>
-          <li>{{recipe.totalTime}}</li>
-        </ul>
-      {{/if}}
+      <div class="row">
+        <div class="col-md-4">
+          <ul class="list-group text-wrap p-0 ml-5 w-75">
+            {{#each recipe.healthLabels}}
+            <li class="ml-3 list-group-item list-group-item-success text-center">{{ this }}</li>
+            {{/each}}
+          </ul>
+        </div>
+        <div class="col-md-7">
+          <div class="pl-5 ml-5">
+            <span class="font-weight-bold">Ingredients</span>
+            <ul>
+              {{#each recipe.ingredients}}
+              <li>{{text}}</li>
+              {{/each}}
+            </ul>
+            <a class="btn btn-primary mt-5 mr-5" target="_blank" href="{{recipe.url}}">View Recipe <span
+                class="fa fa-external-link"></span></a>
 
-      <ul class="list-group mb-3 w-25 mx-auto text-wrap">
-        {{#each recipe.healthLabels}}
-        <li class="list-group-item list-group-item-success text-center">{{ this }}</li>
-        {{/each}}
-      </ul>
-
-      <a class="btn btn-primary" target="_blank" href="{{recipe.url}}">View Recipe <span
-          class="fa fa-external-link"></span></a>
-
-      {{#if recipe.isSaved}}
-      <button class="recipe-bookmark btn btn-warning" data-recipe-uri="{{ getID recipe.uri }}"
-        data-recipe-data="{{getData recipe}}" id="btn-recipe-uri">Saved</button>
-      {{else}}
-      <button class="recipe-bookmark btn btn-secondary" data-recipe-uri="{{ getID recipe.uri }}"
-        data-recipe-data="{{getData recipe}}">Save</button>
-      {{/if}}
-    </p>
-
-
-  {{#if user}}
-    <h4>Private Notes</h4>
-    <div class="social-actions-comments">
-      <button type="button" class="btn btn-primary new-private-note" data-recipe-uri="{{ getID recipe.uri }}" data-recipe-data="{{getData recipe }}">New Private Note</button>
-    </div>
-
-    <div class="notes-container p-2">
-      {{#each notes }}
-        <div class="card rounded shadow-none border-bottom">
-          <div class="card-body rounded p-1">
-            <p class="card-text" contenteditable="true">{{body}}</p>
-            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+            {{#if recipe.isSaved}}
+            <button class="recipe-bookmark btn btn-warning mt-5 ml-5" data-recipe-uri="{{ getID recipe.uri }}"
+              data-recipe-data="{{getData recipe}}" id="btn-recipe-uri">Saved</button>
+            {{else}}
+            <button class="recipe-bookmark btn btn-secondary mt-5 ml-5" data-recipe-uri="{{ getID recipe.uri }}"
+              data-recipe-data="{{getData recipe}}">Save</button>
+            {{/if}}
           </div>
         </div>
-      {{/each}}
-    </div>
+      </div>
+    </p>
 
+    {{!-- NOTES & COMMENTS --}}
+    <div class="container border mt-5">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          {{#if user}}
+          <h4 class="mt-3">Private Notes</h4>
+          <div class="social-actions-comments">
+            <button type="button" class="btn btn-primary new-private-note" data-recipe-uri="{{ getID recipe.uri }}"
+              data-recipe-data="{{getData recipe }}">New Private Note</button>
+          </div>
 
-    <h4>Comments</h4>
-    <div class="social-actions-comments">
-      <button type="button" class="btn btn-primary new-comment" data-recipe-uri="{{ getID recipe.uri }}" data-recipe-data="{{getData recipe }}">New Comment</button>
-    </div>
-    <div class="comments-container">
-      {{#each comments}}
+          <div class="notes-container p-2">
+            {{#each notes }}
+            <div class="card rounded shadow-none border-bottom">
+              <div class="card-body rounded p-1">
+                <p class="card-text" contenteditable="true">{{body}}</p>
+                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+
+      <h4>Comments</h4>
+      <div class="social-actions-comments">
+        <button type="button" class="btn btn-primary new-comment" data-recipe-uri="{{ getID recipe.uri }}"
+          data-recipe-data="{{getData recipe }}">New Comment</button>
+      </div>
+      <div class="comments-container">
+        {{#each comments}}
         <div class="media mb-2">
           <img src="{{this.author.photoUrl}}" class="mr-3 rounded-circle" alt="..." style="max-width: 40px;">
           <div class="media-body">
@@ -80,14 +84,14 @@
             {{this.body}}
           </div>
         </div>
-      {{/each}}
+        {{/each}}
+      </div>
+
+      {{else}}
+      <p class="text-center pt-4">Please Sign In to Comment</p>
+      {{/if}}
+
     </div>
-    
-
-
-  {{else}}
-    Please Sign In to Comment
-  {{/if}}
   </div>
 
 </div>
@@ -122,20 +126,20 @@
         }
       });
       // New Comment
-    } else if(e.target.classList.contains("new-comment")) {
+    } else if (e.target.classList.contains("new-comment")) {
 
-        const uri = e.target.dataset.recipeUri;
-        const $commentForm = document.createElement("div");
-        $commentForm.classList.add("form-group", "comment-form");
-        $commentForm.innerHTML = `
+      const uri = e.target.dataset.recipeUri;
+      const $commentForm = document.createElement("div");
+      $commentForm.classList.add("form-group", "comment-form");
+      $commentForm.innerHTML = `
           <textarea class="form-control" name="body" id="" cols="30" rows="3"></textarea>
           <button class="btn btn-primary submit-comment" id="commentTo_${uri}">Submit</button>
           <button class="btn btn-dark cancel-comment">Cancel</button>
         `;
-        e.target.parentNode.append($commentForm);
-    } else if(e.target.classList.contains("submit-comment")) {
+      e.target.parentNode.append($commentForm);
+    } else if (e.target.classList.contains("submit-comment")) {
 
-      const uri = e.target.id.split("_")[1]; 
+      const uri = e.target.id.split("_")[1];
       const data = {
         body: e.target.previousElementSibling.value,
       }
@@ -154,7 +158,7 @@
           `;
           const $commentContainer = document.querySelector(".comments-container");
           $commentContainer.prepend($comment);
-        } 
+        }
 
         const $prevForm = document.querySelector(".comment-form");
         e.target.parentNode.parentNode.removeChild($prevForm);
@@ -164,11 +168,11 @@
       e.target.parentNode.parentNode.removeChild($prevForm);
 
       //NEW PRIVATE NOTE
-    } else if(e.target.classList.contains("new-private-note")) {
+    } else if (e.target.classList.contains("new-private-note")) {
 
       const uri = e.target.dataset.recipeUri;
       const $noteForm = document.createElement("div");
-      $noteForm.classList.add("form-group", "note-form", );
+      $noteForm.classList.add("form-group", "note-form");
       $noteForm.innerHTML = `
         <textarea class="form-control" name="body" id="" cols="30" rows="3"></textarea>
         <button class="btn btn-primary submit-note" id="noteTo_${uri}">Save</button>
@@ -176,9 +180,9 @@
       `;
       e.target.parentNode.append($noteForm);
 
-    } else if(e.target.classList.contains("submit-note")) {
+    } else if (e.target.classList.contains("submit-note")) {
 
-      const uri = e.target.id.split("_")[1]; 
+      const uri = e.target.id.split("_")[1];
       const data = {
         body: e.target.previousElementSibling.value,
       }
@@ -196,7 +200,7 @@
           `;
           const $noteContainer = document.querySelector(".notes-container");
           $noteContainer.prepend($note);
-        } 
+        }
 
         const $prevForm = document.querySelector(".note-form");
         e.target.parentNode.parentNode.removeChild($prevForm);
