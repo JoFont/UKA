@@ -164,28 +164,33 @@
 
   document.addEventListener('click', e => {
     if (e.target.classList.contains('recipe-bookmark')) {
-      //JSON - change value - stringify -
-      const uri = e.target.dataset.recipeUri;
-      const data = e.target.dataset.recipeData;
+      {{#if user}}
+        //JSON - change value - stringify -
+        const uri = e.target.dataset.recipeUri;
+        const data = e.target.dataset.recipeData;
 
-      axios.post(`/recipes/${uri}/save`, { data: data }).then(res => {
-        const data = res.data;
-        if (data.status === 200 && data.saved) {
-          const dataTmp = JSON.parse(e.target.dataset.recipeData);
-          dataTmp.isSaved = true;
-          e.target.setAttribute("data-recipe-data", JSON.stringify(dataTmp));
-          e.target.classList.remove("btn-secondary");
-          e.target.innerText = "Saved";
-          e.target.classList.add("btn-warning");
-        } else if (data.status === 200 && !data.saved) {
-          const dataTmp = JSON.parse(e.target.dataset.recipeData);
-          dataTmp.isSaved = false;
-          e.target.dataset.recipeData = JSON.stringify(dataTmp);
-          e.target.classList.remove("btn-warning");
-          e.target.innerText = "Save";
-          e.target.classList.add("btn-secondary");
-        }
-      });
+        axios.post(`/recipes/${uri}/save`, { data: data }).then(res => {
+          const data = res.data;
+          if (data.status === 200 && data.saved) {
+            const dataTmp = JSON.parse(e.target.dataset.recipeData);
+            dataTmp.isSaved = true;
+            e.target.setAttribute("data-recipe-data", JSON.stringify(dataTmp));
+            e.target.classList.remove("btn-secondary");
+            e.target.innerText = "Saved";
+            e.target.classList.add("btn-warning");
+          } else if (data.status === 200 && !data.saved) {
+            const dataTmp = JSON.parse(e.target.dataset.recipeData);
+            dataTmp.isSaved = false;
+            e.target.dataset.recipeData = JSON.stringify(dataTmp);
+            e.target.classList.remove("btn-warning");
+            e.target.innerText = "Save";
+            e.target.classList.add("btn-secondary");
+          }
+        });
+      {{else}}
+        window.location.href = "/auth/sign-in";
+      {{/if}}
+      
     }
   });
 </script>
