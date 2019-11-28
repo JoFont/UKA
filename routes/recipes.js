@@ -26,28 +26,15 @@ router.get('/', async (req, res, next) => {
     const exclude = req.query.exclude ? req.query.exclude.split(",").map(el => el.trim()).join("+") : "";
 
     // Cuisine Type
-    // Required result:  cuisineType=Central+Europe&cuisineType=Eastern+Europe
-    // console.log('CUISINE TYPE: ', req.query.cuisineType, '\nTYPEOF: ', typeof req.query.cuisineType);
-    // 
-    let cuisineType;
-    switch (typeof cuisineType) {
+    const cuisineTypeReq = [];
+    switch (typeof req.query.cuisineType) {
       case 'string':
-        if (cuisineType.indexOf(' ') === -1) {
-          cuisineType = (req.query.cuisineType).toLowerCase();
-        } else {
-          cuisineType = (req.query.cuisineType).toLowerCase().replace(' ', '+')
-        }
+        cuisineTypeReq.push(req.query.cuisineType);
+        break;
       case 'object':
-        for (let cuisine of cuisineType) {
-          if (cuisineType.indexOf(' ') === -1) {
-              cuisineType = (req.query.cuisineType).toLowerCase();
-          } else {
-          cuisineType = (req.query.cuisineType).toLowerCase().replace(' ', '+')
-          }
-        }
+        cuisineTypeReq = req.query.cuisineType;
+        break;
     }
-
-
     
     try {
         const response = await axios.get(`https://api.edamam.com/search`, {
@@ -57,7 +44,8 @@ router.get('/', async (req, res, next) => {
                 to: 30,
                 app_key: appKey,
                 exclude: exclude,
-                ingr: maxIngr
+                ingr: maxIngr,
+                cuisineType: cuisineTypeReq
             }
         });
 
