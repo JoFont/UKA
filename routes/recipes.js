@@ -74,6 +74,8 @@ router.get('/', async (req, res, next) => {
         const savedRecipes = await SavedRecipe.find();
 
         response.data.hits.forEach(hit => {
+            hit.recipe.count = 0;
+            
             if(hit.recipe.totalNutrients["SUGAR.added"]) {
                 const addedSugar = hit.recipe.totalNutrients["SUGAR.added"];
                 delete hit.recipe.totalNutrients["SUGAR.added"];
@@ -87,7 +89,10 @@ router.get('/', async (req, res, next) => {
                     if(req.user) {
                         if(hit.recipe.uri.split("recipe_")[1] === item.recipeID && item.authors.includes(req.user._id)) {
                             hit.recipe.isSaved = true;
-                            hit.recipe.count = item.count
+                        }
+
+                        if(hit.recipe.uri.split("recipe_")[1] === item.recipeID) {
+                            hit.recipe.count = item.count;
                         }
                     } else if(hit.recipe.uri.split("recipe_")[1] === item.recipeID) {
                         hit.recipe.count = item.count
@@ -96,7 +101,6 @@ router.get('/', async (req, res, next) => {
                 });
             } else {
                 hit.recipe.isSaved = false;
-                hit.count = 0;
             }
 
             results.push(hit);
