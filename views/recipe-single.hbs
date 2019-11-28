@@ -25,7 +25,7 @@
       <a class="btn btn-primary" target="_blank" href="{{recipe.url}}">View Recipe <span
           class="fa fa-external-link"></span></a>
 
-      {{#if isSaved}}
+      {{#if recipe.isSaved}}
       <button class="recipe-bookmark btn btn-warning" data-recipe-uri="{{ getID recipe.uri }}"
         data-recipe-data="{{getData recipe}}" id="btn-recipe-uri">Saved</button>
       {{else}}
