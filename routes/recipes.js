@@ -68,7 +68,7 @@ router.post('/:recipeID', async (req, res, next) => {
 
     let comments = await Comment.find({ recipe: req.params.recipeID }).populate("author");
 
-    let note = [];
+    let notes = [];
 
     if(req.user) {
         notes = await PrivateNote.find({ recipe: req.params.recipeID, author: req.user._id }).populate("author");
