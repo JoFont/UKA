@@ -157,6 +157,12 @@ a {
 .hidden {
   display: none; }
 
+.recipe .card-title {
+  font-family: 'Libre Baskerville', serif; }
+
+.recipe .card-body {
+  font-family: 'Source Sans Pro', sans-serif; }
+
 @keyframes fadeIn {
   0% {
     opacity: 0; }
@@ -194,10 +200,5 @@ a {
     animation-name: fadeInUp; }
   .m-scene .scene_element--fadeinright {
     animation-name: fadeInRight; }
-.recipe .card-title {
-  font-family: 'Libre Baskerville', serif; }
-
-.recipe .card-body {
-  font-family: 'Source Sans Pro', sans-serif; }
 
 /*# sourceMappingURL=style.css.map */
