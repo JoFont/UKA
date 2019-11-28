@@ -37,21 +37,27 @@
 
   </div>
 
+  <span class="recipe-data-span" id="recipe_{{ getID uri }}" data-recipe-data="{{getData this}}"></span>
+
+  <form action="/recipes/{{ getID uri }}/comment/new" method="POST">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Comment</label>
+        <input hidden type="text" value="{{getData this}}" name="data">
+        <textarea class="form-control" name="body" id="" cols="30" rows="3"></textarea>
+      </div>
+      <button class="btn btn-primary">Submit</button>
+    </form>
+
+  {{#if user}}
     
-    {{#if user}}
-      <form action="/recipes/{{ getID uri }}/comment/new" method="POST">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Comment</label>
-          <input hidden type="text" value="{{getData this}}" name="data">
-          <textarea class="form-control" name="body" id="" cols="30" rows="3"></textarea>
-        </div>
-        <button class="btn btn-primary">Submit</button>
-      </form>
-      {{else}}
-      Please Sign In to Comment
-    {{/if}}
+    {{else}}
+    Please Sign In to Comment
+  {{/if}}
+
 
   {{/with}}
+
+  
 
   <div class="comments-container">
     {{#each comments}}
@@ -71,17 +77,12 @@
 
 
 
-
-
-
 <script>
   document.addEventListener('click', e => {
     if (e.target.classList.contains('recipe-bookmark')) {
-      {{!-- console.dir(e.target); --}}
       //JSON - change value - stringify -
       const uri = e.target.dataset.recipeUri;
       const data = e.target.dataset.recipeData;
-      {{!-- console.dir(dataTmp); --}}
 
       axios.post(`/recipes/${uri}/save`, { data: data }).then(res => {
         const data = res.data;
@@ -100,10 +101,10 @@
           e.target.innerText = "Save";
           e.target.classList.add("btn-secondary");
         }
-        {{!-- console.log(res.data); --}}
       });
 
-    }
+    } 
   });
+
 
 </script>

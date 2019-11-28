@@ -69,7 +69,6 @@ router.post('/:recipeID', async (req, res, next) => {
 
     if(isRecipeSaved) {
         const comments = await Comment.find({ recipe: isRecipeSaved._id }).populate("author").populate("parentComment");
-        console.log(comments);
         res.render('recipe-single', { recipe: data, comments: comments});
     } else {
         const comments = [];
@@ -146,6 +145,32 @@ router.post('/:recipeID/comment/new', async (req, res, next) => {
     } 
 });
 
+
+router.post('/:recipeID/comment/replyTo/:commentID', async (req, res, next) => {
+    try {
+        const recipe = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
+        const parentComment = await Comment.findOne({ _id: req.params.commentID });
+
+        console.log(recipe, parentComment);
+
+        if(recipe) {
+            const comment = await Comment.create({
+                author: req.user._id,
+                recipe: recipe._id,
+                body: req.body.body,
+                parentComment: parentComment._id
+            });
+
+            res.send({
+                status: 200,
+                // comment
+            });
+        }
+        
+    } catch (error) {
+        next(error);
+    } 
+});
 
 
 module.exports = router;
