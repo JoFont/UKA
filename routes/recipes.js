@@ -93,17 +93,22 @@ router.get('/', async (req, res, next) => {
 router.post('/:recipeID', async (req, res, next) => {
   // const recipe = await (req.params.recipeID);
   // console.dir(req.body.data);
-  const data = await JSON.parse(req.body.data);
+    const data = await JSON.parse(req.body.data);
 
-  const isRecipeSaved = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
+    let comments = await Comment.find({ recipe: req.params.recipeID }).populate("author");
 
-    if(isRecipeSaved) {
-        const comments = await Comment.find({ recipe: isRecipeSaved._id }).populate("author").populate("parentComment");
-        res.render('recipe-single', { recipe: data, comments: comments});
-    } else {
-        const comments = [];
-        res.render('recipe-single', { recipe: data, comments: comments});
+    let note = [];
+
+    if(req.user) {
+        notes = await PrivateNote.find({ recipe: req.params.recipeID, author: req.user._id }).populate("author");
+        if(notes === null) notes = [];
     } 
+
+    if(comments === null) {
+        comments = []
+    }
+
+    res.render('recipe-single', { recipe: data, comments: comments, notes: notes});
 });
 
 router.post('/:recipeID/save', async (req, res, next) => {
@@ -136,45 +141,18 @@ router.post('/:recipeID/save', async (req, res, next) => {
 
 router.post('/:recipeID/comment/new', async (req, res, next) => {
     try {
-        const recipe = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
-        
-        console.log(req.body);
+        const comment = await Comment.create({
+            author: req.user._id,
+            recipe: req.params.recipeID,
+            body: req.body.data.body
+        })
 
-        if(recipe) {
-            const comment = await Comment.create({
-                author: req.user._id,
-                recipe: recipe._id,
-                body: req.body.data.body
-            })
+        const newComment = await Comment.findOne({ _id: comment._id}).populate("author");
 
-            const newComment = await Comment.findOne({ _id: comment._id}).populate("author")
-
-            res.send({
-                status: 200,
-                newComment
-            });
-        } else {
-            const newSavedRecipe = new SavedRecipe({
-                recipeID: req.params.recipeID,
-                data: JSON.parse(req.body.data.recipe),
-                count: 1
-            });
-
-            if(newSavedRecipe) {
-                const comment = await Comment.create({
-                    author: req.user._id,
-                    recipe: recipe._id,
-                    body: req.body.body
-                });
-                
-                const newComment = await Comment.findOne({ _id: comment._id}).populate("author")
-
-                res.send({
-                    status: 200,
-                    newComment
-                });
-            }
-        }
+        res.send({
+            status: 200,
+            newComment
+        });
         
     } catch (error) {
         next(error);
@@ -183,39 +161,18 @@ router.post('/:recipeID/comment/new', async (req, res, next) => {
 
 router.post('/:recipeID/private-note/new', async (req, res, next) => {
     try {
-        const recipe = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
+        const note = await PrivateNote.create({
+            author: req.user._id,
+            recipe: req.params.recipeID,
+            body: req.body.data.body
+        })
 
-        if(recipe) {
-            const note = await PrivateNote.create({
-                author: req.user._id,
-                recipe: recipe._id,
-                body: req.body.body
-            });
-    
-            res.send({
-                status: 200,
-                note
-            });
-        } else {
-            const newSavedRecipe = new SavedRecipe({
-                recipeID: req.params.recipeID,
-                data: JSON.parse(req.body.data),
-                count: 1
-            });
+        const newNote = await PrivateNote.findOne({ _id: note._id}).populate("author");
 
-            if(newSavedRecipe) {
-                const note = await Comment.create({
-                    author: req.user._id,
-                    recipe: recipe._id,
-                    body: req.body.body
-                });
-        
-                res.send({
-                    status: 200,
-                    note
-                });
-            }
-        }
+        res.send({
+            status: 200,
+            newNote
+        });
         
     } catch (error) {
         next(error);

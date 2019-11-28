@@ -8,8 +8,7 @@ const schema = new mongoose.Schema({
         required: true
     },
     recipe: {
-        type: mongoose.Types.ObjectId,
-        ref: "SavedRecipe",
+        type: String,
         required: true
     },
     body: {
