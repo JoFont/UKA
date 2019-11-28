@@ -27,19 +27,25 @@ router.get('/', async (req, res, next) => {
 
     // Cuisine Type
     // Required result:  cuisineType=Central+Europe&cuisineType=Eastern+Europe
-    console.log('CUISINE TYPE: ', req.query.cuisineType, '\nTYPEOF: ', typeof req.query.cuisineType);
+    // console.log('CUISINE TYPE: ', req.query.cuisineType, '\nTYPEOF: ', typeof req.query.cuisineType);
     // 
-    // let cuisineType;
-    // switch (typeof cuisineType) {
-    //   case 'string':
-    //     if (cuisineType.indexOf(' ') === -1) {
-    //       cuisineType = (req.query.cuisineType).toLowerCase();
-    //     } else {
-    //       cuisineType = (req.query.cuisineType).toLowerCase().replace(' ', '+')
-    //     }
-    //   case 'object':
-    //     // 
-    // }
+    let cuisineType;
+    switch (typeof cuisineType) {
+      case 'string':
+        if (cuisineType.indexOf(' ') === -1) {
+          cuisineType = (req.query.cuisineType).toLowerCase();
+        } else {
+          cuisineType = (req.query.cuisineType).toLowerCase().replace(' ', '+')
+        }
+      case 'object':
+        for (let cuisine of cuisineType) {
+          if (cuisineType.indexOf(' ') === -1) {
+              cuisineType = (req.query.cuisineType).toLowerCase();
+          } else {
+          cuisineType = (req.query.cuisineType).toLowerCase().replace(' ', '+')
+          }
+        }
+    }
 
 
     
