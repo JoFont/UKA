@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => {
     const exclude = req.query.exclude ? req.query.exclude.split(",").map(el => el.trim()).join("+") : "";
 
     // Cuisine Type
-    const cuisineTypeReq = [];
+    let cuisineTypeReq = [];
     switch (typeof req.query.cuisineType) {
       case 'string':
         cuisineTypeReq.push(req.query.cuisineType);
@@ -86,8 +86,19 @@ router.get('/', async (req, res, next) => {
 
 router.post('/:recipeID', async (req, res, next) => {
   // const recipe = await (req.params.recipeID);
-  // console.dir(req.body.data);
+//   console.dir('Req body: ', req.body.data);
     const data = await JSON.parse(req.body.data);
+    console.dir(data);
+
+    // Remove empty fields
+    // Portions 
+    if (data.yield === 0) {
+        delete data.yield;
+    }
+    // Time
+    if (data.totalTime === 0) {
+        delete data.totalTime;
+    }
 
     let comments = await Comment.find({ recipe: req.params.recipeID }).populate("author");
 

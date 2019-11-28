@@ -1,7 +1,7 @@
 
 
 <div class="card bg-light w-75 mx-auto m-5 shadow-none">
-  {{!-- <div class="card-header">{{ label }}</div> --}}
+
   <img src="{{ recipe.image }}" class="card-img-top" alt="..." style="max-height: 200px; object-fit: cover;">
   <div class="card-body text-wrap">
     <h3 class="card-title mb-5">{{ recipe.label }}</h3>
@@ -12,10 +12,21 @@
         <li>{{text}}</li>
         {{/each}}
       </ul>
-      <span class="font-weight-bold">Portions</span> <br />
-      <ul>
-        <li>{{yield}}</li>
-      </ul>
+      
+      {{#if recipe.yield}}
+        <span class="font-weight-bold">Portions</span> <br />
+        <ul>
+          <li>{{recipe.yield}}</li>
+        </ul>
+      {{/if}}
+      
+      {{#if recipe.totalTime}}
+        <span class="font-weight-bold">Total time</span> <br />
+        <ul>
+          <li>{{recipe.totalTime}}</li>
+        </ul>
+      {{/if}}
+
       <ul class="list-group mb-3 w-25 mx-auto text-wrap">
         {{#each recipe.healthLabels}}
         <li class="list-group-item list-group-item-success text-center">{{ this }}</li>
@@ -200,6 +211,5 @@
       });
     }
   });
-
 
 </script>
