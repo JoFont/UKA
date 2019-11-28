@@ -2,6 +2,7 @@ const router = require('express').Router();
 const axios = require('axios');
 const SavedRecipe = require("../models/SavedRecipe");
 const Comment = require("../models/PublicComment");
+const PrivateNote = require("../models/PrivateNote");
 
 const appId = process.env.EDAMAM_APP_ID;
 const appKey = process.env.EDAMAM_APP_KEY;
@@ -107,22 +108,26 @@ router.post('/:recipeID/save', async (req, res, next) => {
 router.post('/:recipeID/comment/new', async (req, res, next) => {
     try {
         const recipe = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
+        
+        console.log(req.body);
 
         if(recipe) {
             const comment = await Comment.create({
                 author: req.user._id,
                 recipe: recipe._id,
-                body: req.body.body
-            });
-    
+                body: req.body.data.body
+            })
+
+            const newComment = await Comment.findOne({ _id: comment._id}).populate("author")
+
             res.send({
                 status: 200,
-                comment
+                newComment
             });
         } else {
             const newSavedRecipe = new SavedRecipe({
                 recipeID: req.params.recipeID,
-                data: JSON.parse(req.body.data),
+                data: JSON.parse(req.body.data.recipe),
                 count: 1
             });
 
@@ -132,10 +137,12 @@ router.post('/:recipeID/comment/new', async (req, res, next) => {
                     recipe: recipe._id,
                     body: req.body.body
                 });
-        
+                
+                const newComment = await Comment.findOne({ _id: comment._id}).populate("author")
+
                 res.send({
                     status: 200,
-                    comment
+                    newComment
                 });
             }
         }
@@ -145,32 +152,45 @@ router.post('/:recipeID/comment/new', async (req, res, next) => {
     } 
 });
 
-
-router.post('/:recipeID/comment/replyTo/:commentID', async (req, res, next) => {
+router.post('/:recipeID/private-note/new', async (req, res, next) => {
     try {
         const recipe = await SavedRecipe.findOne({ recipeID: req.params.recipeID });
-        const parentComment = await Comment.findOne({ _id: req.params.commentID });
-
-        console.log(recipe, parentComment);
 
         if(recipe) {
-            const comment = await Comment.create({
+            const note = await PrivateNote.create({
                 author: req.user._id,
                 recipe: recipe._id,
-                body: req.body.body,
-                parentComment: parentComment._id
+                body: req.body.body
             });
-
+    
             res.send({
                 status: 200,
-                // comment
+                note
             });
+        } else {
+            const newSavedRecipe = new SavedRecipe({
+                recipeID: req.params.recipeID,
+                data: JSON.parse(req.body.data),
+                count: 1
+            });
+
+            if(newSavedRecipe) {
+                const note = await Comment.create({
+                    author: req.user._id,
+                    recipe: recipe._id,
+                    body: req.body.body
+                });
+        
+                res.send({
+                    status: 200,
+                    note
+                });
+            }
         }
         
     } catch (error) {
         next(error);
     } 
 });
-
 
 module.exports = router;

@@ -2,14 +2,13 @@
 
 <div class="card bg-light w-75 mx-auto m-5 shadow-none">
   {{!-- <div class="card-header">{{ label }}</div> --}}
-  {{#with recipe}}
-  <img src="{{ image }}" class="card-img-top" alt="..." style="max-height: 200px; object-fit: cover;">
+  <img src="{{ recipe.image }}" class="card-img-top" alt="..." style="max-height: 200px; object-fit: cover;">
   <div class="card-body text-wrap">
-    <h3 class="card-title mb-5">{{ label }}</h3>
+    <h3 class="card-title mb-5">{{ recipe.label }}</h3>
     <p class="card-text">
       <span class="font-weight-bold">Ingredients</span>
       <ul>
-        {{#each ingredients}}
+        {{#each recipe.ingredients}}
         <li>{{text}}</li>
         {{/each}}
       </ul>
@@ -18,46 +17,34 @@
         <li>{{yield}}</li>
       </ul>
       <ul class="list-group mb-3 w-25 mx-auto text-wrap">
-        {{#each healthLabels}}
+        {{#each recipe.healthLabels}}
         <li class="list-group-item list-group-item-success text-center">{{ this }}</li>
         {{/each}}
       </ul>
 
-      <a class="btn btn-primary" target="_blank" href="{{url}}">View Recipe <span
+      <a class="btn btn-primary" target="_blank" href="{{recipe.url}}">View Recipe <span
           class="fa fa-external-link"></span></a>
 
       {{#if isSaved}}
-      <button class="recipe-bookmark btn btn-warning" data-recipe-uri="{{ getID uri }}"
-        data-recipe-data="{{getData this}}" id="btn-recipe-uri">Saved</button>
+      <button class="recipe-bookmark btn btn-warning" data-recipe-uri="{{ getID recipe.uri }}"
+        data-recipe-data="{{getData recipe}}" id="btn-recipe-uri">Saved</button>
       {{else}}
-      <button class="recipe-bookmark btn btn-secondary" data-recipe-uri="{{ getID uri }}"
-        data-recipe-data="{{getData this}}">Save</button>
+      <button class="recipe-bookmark btn btn-secondary" data-recipe-uri="{{ getID recipe.uri }}"
+        data-recipe-data="{{getData recipe}}">Save</button>
       {{/if}}
     </p>
 
   </div>
 
-  <span class="recipe-data-span" id="recipe_{{ getID uri }}" data-recipe-data="{{getData this}}"></span>
-
-  <form action="/recipes/{{ getID uri }}/comment/new" method="POST">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Comment</label>
-        <input hidden type="text" value="{{getData this}}" name="data">
-        <textarea class="form-control" name="body" id="" cols="30" rows="3"></textarea>
-      </div>
-      <button class="btn btn-primary">Submit</button>
-    </form>
 
   {{#if user}}
-    
-    {{else}}
+    <div class="social-actions">
+      <button type="button" class="btn btn-primary new-comment" data-recipe-uri="{{ getID recipe.uri }}" data-recipe-data="{{getData recipe}}">New Comment</button>
+    </div>
+  {{else}}
     Please Sign In to Comment
   {{/if}}
 
-
-  {{/with}}
-
-  
 
   <div class="comments-container">
     {{#each comments}}
@@ -102,8 +89,43 @@
           e.target.classList.add("btn-secondary");
         }
       });
+    } else if(e.target.classList.contains("new-comment")) {
 
-    } 
+        const uri = e.target.dataset.recipeUri;
+        const $commentForm = document.createElement("div");
+        $commentForm.classList.add("form-group");
+        $commentForm.innerHTML = `
+          <textarea class="form-control" name="body" id="" cols="30" rows="3"></textarea>
+          <button class="btn btn-primary submit-comment" id="commentTo_${uri}">Submit</button>
+        `;
+        e.target.parentNode.append($commentForm);
+    } else if(e.target.classList.contains("submit-comment")) {
+      const uri = e.target.id.split("_")[1];
+      const data = {
+        //TODO: Add Validation
+        body: e.target.previousElementSibling.value,
+        recipe: e.target.dataset.recipeData
+      }
+
+      axios.post(`/recipes/${uri}/comment/new`, { data: data }).then(res => {
+        const data = res.data;
+        console.log(data);
+
+        if (data.status === 200) {
+          const $comment = document.createElement("div");
+          $comment.classList.add("media", "mb-2");
+          $comment.innerHTML = `
+            <img src="${data.newComment.author.photoUrl}" class="mr-3 rounded-circle" alt="..." style="max-width: 40px;">
+            <div class="media-body">
+              <h5 class="mt-0 mb-0">${data.newComment.author.displayName}</h5>
+              ${data.newComment.body}
+            </div>
+          `;
+          const $commentContainer = document.querySelector(".comments-container");
+          $commentContainer.prepend($comment);
+        } 
+      });
+    }
   });
 
 
