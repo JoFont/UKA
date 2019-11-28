@@ -11,10 +11,6 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    title: {
-        type: String,
-        default: ""
-    },
     body: {
         type: String,
         required: true
