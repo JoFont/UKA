@@ -83,16 +83,28 @@
           <input class="hidden" type="text" name="data" value="{{getData recipe}}" />
           <button class="btn btn-primary">View Recipe</button>
         </form>
-        {{!-- <a href="/recipes/{{ getID recipe.uri }}" class="btn btn-primary">View Recipe</a> --}}
-
-        {{#if recipe.isSaved}}
-        <button class="recipe-bookmark btn btn-warning ml-auto d-inline-block" data-recipe-uri="{{ getID recipe.uri }}"
-          data-recipe-data="{{getData recipe}}">Saved</button>
-        {{else}}
-        <button class="recipe-bookmark btn btn-secondary ml-auto d-inline-block"
-          data-recipe-uri="{{ getID recipe.uri }}" data-recipe-data="{{getData recipe}}">Save</button>
-        {{/if}}
-        {{!-- </div> --}}
+    
+        <div class="d-flex justify-content-between align-items-center mx-3 mt-1">
+          <div class="row">
+            {{#if recipe.isSaved}}
+              <button class="recipe-bookmark btn btn-warning btn-sm" data-recipe-uri="{{ getID recipe.uri }}"
+              data-recipe-data="{{getData recipe}}">
+                <i class="fas fa-bookmark mr-2"></i>
+                Saved
+              </button>
+            {{else}}
+              <button class="recipe-bookmark btn btn-secondary btn-sm"
+              data-recipe-uri="{{ getID recipe.uri }}" data-recipe-data="{{getData recipe}}">
+                <i class="fas fa-bookmark mr-2"></i>
+                Save
+              </button>
+            {{/if}}
+          </div>
+          <div class="row d-flex align-items-center">
+              <h5 class="m-0 mr-1">{{recipe.count}}</h5>
+              <i class="fas fa-bookmark mr-2 text-danger"></i>
+          </div>
+        </div>
       </div>
     </div>
     {{/each}}
