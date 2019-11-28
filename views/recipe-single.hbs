@@ -93,13 +93,14 @@
 
         const uri = e.target.dataset.recipeUri;
         const $commentForm = document.createElement("div");
-        $commentForm.classList.add("form-group");
+        $commentForm.classList.add("form-group", "comment-form");
         $commentForm.innerHTML = `
           <textarea class="form-control" name="body" id="" cols="30" rows="3"></textarea>
           <button class="btn btn-primary submit-comment" id="commentTo_${uri}">Submit</button>
         `;
         e.target.parentNode.append($commentForm);
     } else if(e.target.classList.contains("submit-comment")) {
+
       const uri = e.target.id.split("_")[1];
       const data = {
         //TODO: Add Validation
@@ -124,6 +125,9 @@
           const $commentContainer = document.querySelector(".comments-container");
           $commentContainer.prepend($comment);
         } 
+
+        const $prevForm = document.querySelector(".comment-form");
+        e.target.parentNode.parentNode.removeChild($prevForm);
       });
     }
   });
