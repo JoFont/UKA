@@ -102,7 +102,6 @@ router.post('/:recipeID', async (req, res, next) => {
   // const recipe = await (req.params.recipeID);
 //   console.dir('Req body: ', req.body.data);
     const data = await JSON.parse(req.body.data);
-    console.dir(data);
 
     // Remove empty fields
     // Portions 
@@ -183,7 +182,6 @@ router.post('/:recipeID/private-note/new', async (req, res, next) => {
         const note = await PrivateNote.create({
             author: req.user._id,
             recipe: req.params.recipeID,
-            title: req.body.data.title,
             body: req.body.data.body
         })
 

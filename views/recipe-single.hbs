@@ -54,10 +54,10 @@
 
     <div class="notes-container p-2">
       {{#each notes }}
-        <div class="card rounded">
+        <div class="card rounded shadow-none border-bottom">
           <div class="card-body rounded p-1">
-            <h5 class="car-title">{{title}}</h5>
             <p class="card-text" contenteditable="true">{{body}}</p>
+            <button type="button" class="btn btn-danger btn-sm">Delete</button>
           </div>
         </div>
       {{/each}}
@@ -172,9 +172,8 @@
 
       const uri = e.target.dataset.recipeUri;
       const $noteForm = document.createElement("div");
-      $noteForm.classList.add("form-group", "note-form");
+      $noteForm.classList.add("form-group", "note-form", );
       $noteForm.innerHTML = `
-        <input type="text" name="title">
         <textarea class="form-control" name="body" id="" cols="30" rows="3"></textarea>
         <button class="btn btn-primary submit-note" id="noteTo_${uri}">Save</button>
         <button class="btn btn-dark cancel-note">Cancel</button>
@@ -185,7 +184,6 @@
 
       const uri = e.target.id.split("_")[1]; 
       const data = {
-        title: e.target.previousElementSibling.previousElementSibling.value,
         body: e.target.previousElementSibling.value,
       }
 
@@ -194,10 +192,9 @@
         console.log(data);
         if (data.status === 200) {
           const $note = document.createElement("div");
-          $note.classList.add("card", "mb-2");
+          $note.classList.add("card", "mb-2", "rounded", "shadow-nonde", "border-bottom");
           $note.innerHTML = `
-            <div class="card-body">
-              <h5 class="card-title">${data.newNote.title}</h5>
+            <div class="card-body rounded p-1">
               <p class="card-text" contenteditable="true">${data.newNote.body}</p>
             </div>
           `;
