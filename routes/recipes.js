@@ -35,17 +35,31 @@ router.get('/', async (req, res, next) => {
         cuisineTypeReq = req.query.cuisineType;
         break;
     }
+
+    // Dietary restrictions
+    let restrictions = [];
+    switch (typeof req.query.restrictions) {
+    case 'string':
+      restrictions.push(req.query.restrictions);
+      break;
+    case 'object':
+      restrictions = req.query.restrictions;
+      break;
+    }
+
+    console.log(req.query.restrictions);
     
     try {
         const response = await axios.get(`https://api.edamam.com/search`, {
             params: {
-                q: include,
-                app_id: appId,
-                to: 30,
-                app_key: appKey,
-                exclude: exclude,
-                ingr: maxIngr,
-                cuisineType: cuisineTypeReq
+              q: include,
+              app_id: appId,
+              to: 30,
+              app_key: appKey,
+              exclude: exclude,
+              ingr: maxIngr,
+              cuisineType: cuisineTypeReq,
+              health: restrictions
             }
         });
 
