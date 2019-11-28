@@ -102,6 +102,7 @@ router.post('/:recipeID', async (req, res, next) => {
   // const recipe = await (req.params.recipeID);
 //   console.dir('Req body: ', req.body.data);
     const data = await JSON.parse(req.body.data);
+    console.log(data);
 
     // Remove empty fields
     // Portions 
