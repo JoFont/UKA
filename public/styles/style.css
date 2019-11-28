@@ -3,7 +3,8 @@ body {
   padding: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: 100%;
-  height: 100vh; }
+  height: 100vh;
+  background-color: #ecefea; }
 
 a {
   color: #00b7ff; }
@@ -11,6 +12,9 @@ a {
 .logo {
   width: 100%;
   height: auto; }
+
+.restrictions {
+  margin: 0.1em 0.5em; }
 
 .btn-green {
   background-color: #5cb85c;
