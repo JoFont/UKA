@@ -20,17 +20,17 @@
       <div class="col">
         <div class="form-group">
           <label for="max-ingredients">Maximum number of ingredients</label>
-          <input type="number" id="max-ingredients" name="max-ingredients"/>
+          <input type="number" id="max-ingredients" name="max"/>
         </div>
         <div class="form-group">
           <label for="cuisine">Cuisine</label>
-          <select multiple class="form-control" name="cuisine" id="cuisine">
+          <select multiple class="form-control" name="cuisineType" id="cuisine">
             <option value="American">American</option>
             <option value="Asian">Asian</option>
             <option value="British">British</option>
             <option value="Caribbean">Caribbean</option>
             <option value="Central Europe">Central Europe</option>
-            <option value="Chinese">Central Europe</option>
+            <option value="Chinese">Chinese</option>
             <option value="Eastern Europe">Eastern Europe</option>
             <option value="French">French</option>
             <option value="Indian">Indian</option>
@@ -47,23 +47,22 @@
         </div>
 
         <div class="form-group">
-          {{!-- <p class="font-weight-bold">Dietary restrictions</p> --}}
-          <div>
-            <input type="checkbox" id="alcohol-free" value="alcohol-free" name="restrictions" />
-            <label for="alcohol-free">Alcohol-free</label>
-            <input type="checkbox" id="celery-free" value="celery-free"name="restrictions" />
-            <label for="celery-free">Celery-free</label>
-            <input type="checkbox" id="crustacean-free" value="crustacean-free" name="restrictions" />
-            <label for="crustacean-free">Crustacean-free</label>
-            <input type="checkbox" id="dairy-free" value="dairy-free" name="restrictions" />
-            <label for="dairy-free">Dairy-free</label>
+          <input type="checkbox" id="alcohol-free" value="alcohol-free" name="restrictions" />
+          <label for="alcohol-free">Alcohol-free</label>
+          <input type="checkbox" id="celery-free" value="celery-free"name="restrictions" />
+          <label for="celery-free">Celery-free</label>
+          <input type="checkbox" id="crustacean-free" value="crustacean-free" name="restrictions" />
+          <label for="crustacean-free">Crustacean-free</label>
+          <input type="checkbox" id="dairy-free" value="dairy-free" name="restrictions" />
+          <label for="dairy-free">Dairy-free</label>
 
+          <div class="form-group">
+            <label for="exclude">Exclude</label>
+            <input type="text" name="exclude" id="exclude" />
           </div>
 
         </div>
-          {{!-- <li>Dietary restrictions</li>
-          <li>Exclude</li> --}}
-      
+     
       </div>
     </div>
   </form>

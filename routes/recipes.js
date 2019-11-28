@@ -1,3 +1,5 @@
+'use strict'
+
 const router = require('express').Router();
 const axios = require('axios');
 const SavedRecipe = require("../models/SavedRecipe");
@@ -8,12 +10,39 @@ const appId = process.env.EDAMAM_APP_ID;
 const appKey = process.env.EDAMAM_APP_KEY;
 
 router.get('/', async (req, res, next) => {
+    // console.log(req.query);
     const includeCount = req.query.include.split(",").length;
-    const maxIngr = req.query.strict === "on" ? includeCount : "100";
+    
+    // Max ingredients
+    let max;
+    if (req.query.maxI) {
+        max = `req.query.max`;
+    } else {
+        max = "100";
+    }
+    const maxIngr = req.query.strict === "on" ? includeCount : max;
 
     const include = req.query.include.split(",").map(el => el.trim()).join("+");
     const exclude = req.query.exclude ? req.query.exclude.split(",").map(el => el.trim()).join("+") : "";
 
+    // Cuisine Type
+    // Required result:  cuisineType=Central+Europe&cuisineType=Eastern+Europe
+    console.log('CUISINE TYPE: ', req.query.cuisineType, '\nTYPEOF: ', typeof req.query.cuisineType);
+    // 
+    // let cuisineType;
+    // switch (typeof cuisineType) {
+    //   case 'string':
+    //     if (cuisineType.indexOf(' ') === -1) {
+    //       cuisineType = (req.query.cuisineType).toLowerCase();
+    //     } else {
+    //       cuisineType = (req.query.cuisineType).toLowerCase().replace(' ', '+')
+    //     }
+    //   case 'object':
+    //     // 
+    // }
+
+
+    
     try {
         const response = await axios.get(`https://api.edamam.com/search`, {
             params: {
