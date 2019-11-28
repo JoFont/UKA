@@ -13,6 +13,11 @@ a {
   color: $link-color;
 }
 
+.logo {
+  width: 100%;
+  height: auto;
+}
+
 #index, .fs-bg {
   display: flex;
   flex-direction: column;

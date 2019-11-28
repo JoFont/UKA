@@ -8,6 +8,10 @@ body {
 a {
   color: #00b7ff; }
 
+.logo {
+  width: 100%;
+  height: auto; }
+
 #index, .fs-bg {
   display: flex;
   flex-direction: column;
