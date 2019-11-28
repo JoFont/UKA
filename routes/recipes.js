@@ -112,11 +112,16 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.post('/:recipeID', async (req, res, next) => {
+router.get('/:recipeID', async (req, res, next) => {
   // const recipe = await (req.params.recipeID);
 //   console.dir('Req body: ', req.body.data);
-    const data = await JSON.parse(req.body.data);
-    console.log(data);
+    // const cenas = await JSON.parse(req.body.data);
+    
+    // console.log(data);
+    const url = `https://api.edamam.com/search?app_id=592e2c63&app_key=44387e1901b8028e1c591ac1dd9da636&r=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_${req.params.recipeID}`;
+
+    const response = await axios.get(url);
+    const data = response.data[0];
 
     // Remove empty fields
     // Portions 

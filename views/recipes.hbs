@@ -127,8 +127,8 @@
         <p class="card-text">{{ recipe.source }}</p>
         {{!-- <div class="d-flex flex-row"> --}}
         {{!-- NEED TO SEND DATA & CHANGE PAGE SO FORM...--}}
-        <form action="/recipes/{{ getID recipe.uri }}" method="POST" class="d-inline">
-          <input class="hidden" type="text" name="data" value="{{getData recipe}}" />
+        <form action="/recipes/{{ getID recipe.uri }}" method="GET" class="d-inline">
+          {{!-- <input class="hidden" type="text" name="data" value="{{getData recipe}}" /> --}}
           <button class="btn btn-primary">View Recipe</button>
         </form>
     
