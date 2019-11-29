@@ -24,9 +24,16 @@
 
     <div class="collapse card card-body w-100" id="advanced">
       <div class="col">
-        <div class="form-group">
-          <label for="max-ingredients">Maximum number of ingredients</label>
-          <input type="number" id="max-ingredients" name="max"/>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label class="w-25" for="max-ingredients">Max number of ingredients</label>
+            <input class="w-100" type="number" id="max-ingredients" name="max"/>
+          </div>
+          <div class="col-md-6">
+            <label class="w-25" for="exclude">Exclude these ingredients</label>
+            <input class="w-100" type="text" name="exclude" id="exclude" />
+          </div>
+          <hr />
         </div>
         <div class="form-group">
           <label for="cuisine">Cuisine</label>
@@ -53,68 +60,137 @@
         </div>
 
         <div class="form-group restrictions">
-          <input type="checkbox" id="alcohol-free" value="alcohol-free" name="restrictions" />
-          <label for="alcohol-free">Alcohol-free</label>
-          <input type="checkbox" id="celery-free" value="celery-free"name="restrictions" />
-          <label for="celery-free">Celery-free</label>
-          <input type="checkbox" id="crustacean-free" value="crustacean-free" name="restrictions" />
-          <label for="crustacean-free">Crustacean-free</label>
-          <input type="checkbox" id="dairy-free" value="dairy-free" name="restrictions" />
-          <label for="dairy-free">Dairy-free</label>
-          <input type="checkbox" id="egg-free" value="egg-free" name="restrictions" />
-          <label for="egg-free">Egg-free</label>
-          <input type="checkbox" id="fish-free" value="fish-free" name="restrictions" />
-          <label for="fish-free">Fish-free</label>
-          <input type="checkbox" id="fodmap-free" value="fodmap-free" name="restrictions" />
-          <label for="fodmap-free">FODMAP-free</label>
-          <input type="checkbox" id="gluten-free" value="gluten-free" name="restrictions" />
-          <label for="gluten-free">Gluten-free</label>
-          <input type="checkbox" id="keto-friendly" value="keto-friendly" name="restrictions" />
-          <label for="keto-friendly">Keto-friendly</label>
-          <input type="checkbox" id="kosher" value="kosher" name="restrictions" />
-          <label for="kosher">Kosher</label>
-          <input type="checkbox" id="low-potassium" value="low-potassium" name="restrictions" />
-          <label for="low-potassium">Low-potassium</label>
-          <input type="checkbox" id="lupine-free" value="lupine-free" name="restrictions" />
-          <label for="lupine-free">Lupine-free</label>
-          <input type="checkbox" id="mustard-free" value="mustard-free" name="restrictions" />
-          <label for="mustard-free">Mustard-free</label>
-          <input type="checkbox" id="low-fat-abs" value="low-fat-abs" name="restrictions" />
-          <label for="low-fat-abs">Low fat</label>
-          <input type="checkbox" id="no-oil-added" value="no-oil-added" name="restrictions" />
-          <label for="no-oil-added">No added oil</label>
-          <input type="checkbox" id="low-sugar" value="low-sugar" name="restrictions" />
-          <label for="low-sugar">Low Sugar</label>
-          <input type="checkbox" id="paleo" value="paleo" name="restrictions" />
-          <label for="paleo">Paleo</label>
-          <input type="checkbox" id="peanut-free" value="peanut-free" name="restrictions" />
-          <label for="peanut-free">Peanut-free</label>
-          <input type="checkbox" id="pecatarian" value="pecatarian" name="restrictions" />
-          <label for="pecatarian">Pecatarian</label>
-          <input type="checkbox" id="pork-free" value="pork-free" name="restrictions" />
-          <label for="pork-free">Pork-free</label>
-          <input type="checkbox" id="red-meat-free" value="red-meat-free" name="restrictions" />
-          <label for="red-meat-free">Red meat-free</label>
-          <input type="checkbox" id="sesame-free" value="sesame-free" name="restrictions" />
-          <label for="sesame-free">Sesame-free</label>
-          <input type="checkbox" id="shellfish-free" value="shellfish-free" name="restrictions" />
-          <label for="shellfish-free">Shellfish-free</label>
-          <input type="checkbox" id="soy-free" value="soy-free" name="restrictions" />
-          <label for="soy-free">Shellfish-free</label>
-          <input type="checkbox" id="sugar-conscious" value="sugar-conscious" name="restrictions" />
-          <label for="sugar-conscious">Sugar-conscious</label>
-          <input type="checkbox" id="tree-nut-free" value="tree-nut-free" name="restrictions" />
-          <label for="tree-nut-free">Tree nut conscious</label>
-          <input type="checkbox" id="vegan" value="vegan" name="restrictions" />
-          <label for="vegan">Vegan</label>
-          <input type="checkbox" id="vegetarian" value="vegetarian" name="restrictions" />
-          <label for="vegetarian">Vegetarian</label>
-          <input type="checkbox" id="	wheat-free" value="	wheat-free" name="restrictions" />
-          <label for="	wheat-free">Wheat-free</label>
-
-          <div class="form-group">
-            <label for="exclude">Exclude</label>
-            <input type="text" name="exclude" id="exclude" />
+          <div class="row">
+            <div class="col-md">
+              <input type="checkbox" id="alcohol-free" value="alcohol-free" name="restrictions" />
+              <label for="alcohol-free">Alcohol-free</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="celery-free" value="celery-free"name="restrictions" />
+              <label for="celery-free">Celery-free</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="crustacean-free" value="crustacean-free" name="restrictions" />
+              <label for="crustacean-free">Crustacean-free</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="dairy-free" value="dairy-free" name="restrictions" />
+              <label for="dairy-free">Dairy-free</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <input type="checkbox" id="egg-free" value="egg-free" name="restrictions" />
+              <label for="egg-free">Egg-free</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="fish-free" value="fish-free" name="restrictions" />
+              <label for="fish-free">Fish-free</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="fodmap-free" value="fodmap-free" name="restrictions" />
+              <label for="fodmap-free">FODMAP-free</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="gluten-free" value="gluten-free" name="restrictions" />
+              <label for="gluten-free">Gluten-free</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <input type="checkbox" id="keto-friendly" value="keto-friendly" name="restrictions" />
+              <label for="keto-friendly">Keto-friendly</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="kosher" value="kosher" name="restrictions" />
+              <label for="kosher">Kosher</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="low-potassium" value="low-potassium" name="restrictions" />
+              <label for="low-potassium">Low-potassium</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="lupine-free" value="lupine-free" name="restrictions" />
+              <label for="lupine-free">Lupine-free</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <input type="checkbox" id="mustard-free" value="mustard-free" name="restrictions" />
+              <label for="mustard-free">Mustard-free</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="low-fat-abs" value="low-fat-abs" name="restrictions" />
+              <label for="low-fat-abs">Low fat</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="no-oil-added" value="no-oil-added" name="restrictions" />
+              <label for="no-oil-added">No added oil</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="low-sugar" value="low-sugar" name="restrictions" />
+              <label for="low-sugar">Low Sugar</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <input type="checkbox" id="paleo" value="paleo" name="restrictions" />
+              <label for="paleo">Paleo</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="peanut-free" value="peanut-free" name="restrictions" />
+              <label for="peanut-free">Peanut-free</label>    
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="pecatarian" value="pecatarian" name="restrictions" />
+              <label for="pecatarian">Pecatarian</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="pork-free" value="pork-free" name="restrictions" />
+              <label for="pork-free">Pork-free</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <input type="checkbox" id="red-meat-free" value="red-meat-free" name="restrictions" />
+              <label for="red-meat-free">Red meat-free</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="sesame-free" value="sesame-free" name="restrictions" />
+              <label for="sesame-free">Sesame-free</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="shellfish-free" value="shellfish-free" name="restrictions" />
+              <label for="shellfish-free">Shellfish-free</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="soy-free" value="soy-free" name="restrictions" />
+              <label for="soy-free">Shellfish-free</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <input type="checkbox" id="sugar-conscious" value="sugar-conscious" name="restrictions" />
+              <label for="sugar-conscious">Sugar-conscious</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="tree-nut-free" value="tree-nut-free" name="restrictions" />
+              <label for="tree-nut-free">Tree nut conscious</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="vegan" value="vegan" name="restrictions" />
+              <label for="vegan">Vegan</label>
+            </div>
+            <div class="col-md">
+              <input type="checkbox" id="vegetarian" value="vegetarian" name="restrictions" />
+              <label for="vegetarian">Vegetarian</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <input type="checkbox" id="	wheat-free" value="	wheat-free" name="restrictions" />
+              <label for="wheat-free"> Wheat-free</label>
+            </div>
           </div>
         </div>
      
