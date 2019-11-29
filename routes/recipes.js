@@ -145,7 +145,10 @@ router.get('/:recipeID', async (req, res, next) => {
     if(comments === null) {
         comments = []
     }
+    let isSaved = false;
+    isSaved = await SavedRecipe.findOne({ recipeID: req.params.recipeID, authors : { $in: req.user._id }})
 
+    data.isSaved = isSaved;
     res.render('recipe-single', { recipe: data, comments: comments, notes: notes});
 });
 
