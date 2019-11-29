@@ -114,54 +114,7 @@
 
 
 
-<div class="card w-75 mx-auto m-5 shadow-none recipe">
-  <div class="row m-0 mt-5 justify-content-center">
-    <img src="{{ recipe.image }}" class="col-lg-4 p-0 m-3 float-left" alt="..."
-      style="max-height: 200px; object-fit: cover; border: 0.16em solid rgba(230, 232, 230, 0.4); border-radius: 0.5em;">
-    <div class="col-lg-7 m-3">
-
-      <h3 class="card-title mb-5">{{ recipe.label }}</h3>
-      <div class="d-flex justify-content-between">
-        {{#if recipe.totalTime}}
-        <span class="font-weight-bold text-left">Total time: {{recipe.totalTime}} minutes</span>
-        {{/if}}
-
-        {{#if recipe.yield}}
-        <span class="font-weight-bold text-right">Servings: {{recipe.yield}}</span>
-        {{/if}}
-      </div>
-    </div>
-  </div>
-  <div class="card-body text-wrap">
-    <p class="card-text">
-      <div class="row">
-        <div class="col-lg-4">
-          <ul class="list-group text-wrap w-100 m-2">
-            {{#each recipe.healthLabels}}
-            <li class="list-group-item list-group-item-success text-center">{{ this }}</li>
-            {{/each}}
-          </ul>
-        </div>
-        <div class="col-lg-7">
-          <div class="d-flex flex-column align-items-center ingredients">
-            <div class="ml-5 mr-5">
-              <p class="font-weight-bold mb-3">Ingredients</p>
-              <ul style="font-style: italic;">
-                {{#each recipe.ingredients}}
-                <li>{{text}}</li>
-                {{/each}}
-              </ul>
-            </div>
-          </div>
-            <a class="btn btn-primary mt-5 mr-5" target="_blank" href="{{recipe.url}}">View Recipe <span
-                class="fa fa-external-link"></span></a>
-
-            
-        </div>
-      </div>
-    </p>
-
-    {{!-- NOTES & COMMENTS --}}
+{{!-- NOTES & COMMENTS --}}
     <div class="container border mt-5">
       <div class="row justify-content-center mt-3 mb-3">
         <div class="col-12 mt-3">
@@ -211,56 +164,8 @@
       {{/if}}
 
     </div>
-  </div>
-
-</div>
 
 
-<div class="container">
-  <div class="card mb-3">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="{{ recipe.image }}" class="card-img" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body h-100">
-          <h5 class="card-title mb-1">{{ recipe.label }}</h5>
-          <blockquote class="blockquote p-0 m-0 mb-3">
-            <footer class="blockquote-footer">
-              <small class="text-muted">
-                from <cite title="Source Title">{{ recipe.source }}</cite>
-              </small>
-            </footer>
-          </blockquote>
-
-          <div class="d-flex justify-content-start">
-            <div class="shadow rounded bg-white m-1">
-                <div class="row bg-danger text-white" style="max-width: 40px;">
-                  <small>Potassium</small>
-                </div>
-                <div class="row bg-white" style="max-width: 40px;">
-                  <small>100 g</small>
-                </div>
-              </div>
-            {{#each recipe.totalNutrients}}
-              
-            {{/each}}
-          </div>
-
-
-          <div class="">
-            <p class="card-text m-1 border-bottom"><small class="text-muted">Health Labels</small></p>
-            <div class="d-flex justify-content-start align-items-center">
-              {{#each recipe.healthLabels}}
-                <span class="badge badge-success m-1">{{this}}</span>
-              {{/each}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 <script>
