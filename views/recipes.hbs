@@ -5,7 +5,7 @@
       <div class="ml-3 m-2 mr-0 col-sm-12 col-md-6 d-flex flex-row justify-content-center">
         <input type="text" class="border rounded p-2 w-100" name="include" 
         {{#if includes}}
-          placeholder=" {{#with includes}}{{ this }}{{/with}}" />
+          value=" {{#with includes}}{{ this }}{{/with}}" />
         {{else}}
           placeholder="Enter your ingredients..." required />
         {{/if}}
