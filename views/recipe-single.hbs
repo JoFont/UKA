@@ -29,9 +29,11 @@
                 {{/if}}
               </div>
               <div class="col d-flex justify-content-end align-items-center">
-                <div>
-                  <a class="btn btn-primary mt-5 mr-5" target="_blank" href="{{recipe.url}}">View Recipe <span
-                class="fa fa-external-link"></span></a>
+                <div class="mr-2">
+                  <a href="{{recipe.url}}" class="btn btn-primary btn-sm">
+                    View Recipe Source
+                    <i class="fas fa-link"></i>
+                  </a>
                 </div>
                 <div>
                   {{#if recipe.isSaved}}
@@ -44,7 +46,7 @@
                     <button class="recipe-bookmark btn btn-secondary btn-sm" data-recipe-uri="{{ getID recipe.uri }}"
                       data-recipe-data="{{getData recipe}}">
                       <i class="fas fa-bookmark mr-2"></i>
-                      Saved
+                      Save
                     </button>
                   {{/if}}
                 </div>
