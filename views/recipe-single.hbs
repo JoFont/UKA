@@ -115,55 +115,55 @@
 
 
 {{!-- NOTES & COMMENTS --}}
-    <div class="container border mt-5">
-      <div class="row justify-content-center mt-3 mb-3">
-        <div class="col-12 mt-3">
-          {{#if user}}
-          <h4>Private Notes</h4>
-          <div class="social-actions-comments">
-            <button type="button" class="btn btn-primary new-private-note" data-recipe-uri="{{ getID recipe.uri }}"
-              data-recipe-data="{{getData recipe }}">New Private Note</button>
-          </div>
+  <div class="container border mt-5">
+    <div class="row justify-content-center mt-3 mb-3">
+      <div class="col-12 mt-3">
+        {{#if user}}
+        <h4>Private Notes</h4>
+        <div class="social-actions-comments">
+          <button type="button" class="btn btn-primary new-private-note" data-recipe-uri="{{ getID recipe.uri }}"
+            data-recipe-data="{{getData recipe }}">New Private Note</button>
+        </div>
 
-          <div class="notes-container p-2">
-            {{#each notes }}
-            <div class="card rounded shadow-none border-bottom">
-              <div class="card-body rounded p-1">
-                <p class="card-text" contenteditable="true">{{body}}</p>
-                <button type="button" class="btn btn-danger btn-sm">Delete</button>
-              </div>
+        <div class="notes-container p-2">
+          {{#each notes }}
+          <div class="card rounded shadow-none border-bottom">
+            <div class="card-body rounded p-1">
+              <p class="card-text" contenteditable="true">{{body}}</p>
+              <button type="button" class="btn btn-danger btn-sm">Delete</button>
             </div>
-            {{/each}}
           </div>
+          {{/each}}
         </div>
       </div>
-
-      <div class="row mb-3">
-        <div class="col">
-          <h4>Comments</h4>
-          <div class="social-actions-comments">
-            <button type="button" class="btn btn-primary new-comment" data-recipe-uri="{{ getID recipe.uri }}"
-              data-recipe-data="{{getData recipe }}">New Comment</button>
-          </div>
-          <div class="comments-container">
-            {{#each comments}}
-            <div class="media mb-2">
-              <img src="{{this.author.photoUrl}}" class="mr-3 rounded-circle" alt="..." style="max-width: 40px;">
-              <div class="media-body">
-                <h5 class="mt-0 mb-0">{{this.author.displayName}}</h5>
-                {{this.body}}
-              </div>
-            </div>
-            {{/each}}
-          </div>
-        </div>
-      </div>
-
-      {{else}}
-      <p class="text-center pt-4">Please Sign In to Comment</p>
-      {{/if}}
-
     </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <h4>Comments</h4>
+        <div class="social-actions-comments">
+          <button type="button" class="btn btn-primary new-comment" data-recipe-uri="{{ getID recipe.uri }}"
+            data-recipe-data="{{getData recipe }}">New Comment</button>
+        </div>
+        <div class="comments-container">
+          {{#each comments}}
+          <div class="media mb-2">
+            <img src="{{this.author.photoUrl}}" class="mr-3 rounded-circle" alt="..." style="max-width: 40px;">
+            <div class="media-body">
+              <h5 class="mt-0 mb-0">{{this.author.displayName}}</h5>
+              {{this.body}}
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    {{else}}
+    <p class="text-center pt-4">Please Sign In to Comment</p>
+    {{/if}}
+
+  </div>
 
 
 
@@ -183,14 +183,20 @@
           dataTmp.isSaved = true;
           e.target.dataset.recipeData = JSON.stringify(dataTmp);
           e.target.classList.remove("btn-secondary");
-          e.target.innerText = "Saved";
+          e.target.innerHTML = `
+            <i class="fas fa-bookmark mr-2"></i>
+            Saved
+            `;
           e.target.classList.add("btn-warning");
         } else if (data.status === 200 && !data.saved) {
           const dataTmp = JSON.parse(e.target.dataset.recipeData);
           dataTmp.isSaved = false;
           e.target.dataset.recipeData = JSON.stringify(dataTmp);
           e.target.classList.remove("btn-warning");
-          e.target.innerText = "Save";
+          e.target.innerHTML = `
+            <i class="fas fa-bookmark mr-2"></i>
+            Save
+            `;
           e.target.classList.add("btn-secondary");
         }
       });
