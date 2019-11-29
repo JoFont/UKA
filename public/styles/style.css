@@ -201,4 +201,13 @@ a {
   .m-scene .scene_element--fadeinright {
     animation-name: fadeInRight; }
 
+.btn-uka-fill {
+  background-color: #5cb85c; }
+
+.btn-uka-border {
+  border-color: #5cb85c; }
+
+.bg-uka-light {
+  background-color: #EFEEEA; }
+
 /*# sourceMappingURL=style.css.map */

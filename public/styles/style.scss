@@ -1,6 +1,10 @@
 $font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $link-color: #00b7ff;
 
+$dark: #302C2C;
+$light: #EFEEEA;
+$green: #5cb85c;
+
 body {
   margin: 0;
   padding: 0;
@@ -288,4 +292,17 @@ a {
   .scene_element--fadeinright {
     animation-name: fadeInRight;
   }
+}
+
+
+.btn-uka-fill {
+  background-color: $green;
+}
+
+.btn-uka-border {
+  border-color: $green;
+}
+
+.bg-uka-light {
+  background-color: $light;
 }
