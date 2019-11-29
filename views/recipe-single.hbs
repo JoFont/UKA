@@ -1,3 +1,117 @@
+
+<div class="container mt-5 pt-5 ">
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="{{ recipe.image }}" class="card-img" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body h-100 d-flex flex-column justify-content-between">
+          <div class="recipe-title">
+            <h5 class="card-title mb-1">{{ recipe.label }}</h5>
+            <blockquote class="blockquote p-0 m-0 mb-3">
+              <footer class="blockquote-footer">
+                <small class="text-muted">
+                  from <cite title="Source Title">{{ recipe.source }}</cite>
+                </small>
+              </footer>
+            </blockquote>
+          </div>
+
+          <div class="recipe-info">
+            <div class="row">
+              <div class="col">
+                {{#if recipe.totalTime}}
+                  <h6 class="m-0">Total time: <strong>{{recipe.totalTime}} minutes</strong></h6>
+                {{/if}}
+                {{#if recipe.yield}}
+                  <h6 class="m-0">Servings: <strong>{{recipe.yield}}</strong></h6>
+                {{/if}}
+              </div>
+              <div class="col d-flex justify-content-end align-items-center">
+                <div>
+                  <a class="btn btn-primary mt-5 mr-5" target="_blank" href="{{recipe.url}}">View Recipe <span
+                class="fa fa-external-link"></span></a>
+                </div>
+                <div>
+                  {{#if recipe.isSaved}}
+                    <button class="recipe-bookmark btn btn-warning btn-sm" data-recipe-uri="{{ getID recipe.uri }}"
+                    data-recipe-data="{{getData recipe}}" id="btn-recipe-uri">
+                      <i class="fas fa-bookmark mr-2"></i>
+                      Saved
+                    </button>
+                  {{else}}
+                    <button class="recipe-bookmark btn btn-secondary btn-sm" data-recipe-uri="{{ getID recipe.uri }}"
+                      data-recipe-data="{{getData recipe}}">
+                      <i class="fas fa-bookmark mr-2"></i>
+                      Saved
+                    </button>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+            
+            <hr class="m-0 mb-2">
+            <div class="d-flex justify-content-start align-items-center mb-2">
+              {{#each recipe.healthLabels}}
+                <span class="badge badge-success mr-1">{{this}}</span>
+              {{/each}}
+            </div>
+            {{#with recipe.totalNutrients}}
+              <div class="d-flex justify-content-start">
+                <div class="d-flex flex-column rounded shadow mr-1">
+                  <span class="badge badge-danger">kcal</span>
+                  <small class="text-muted mx-auto">{{ round this.ENERC_KCAL.quantity}}</small>
+                </div>
+                <div class="d-flex flex-column rounded shadow mr-1">
+                  <span class="badge badge-danger">fat</span>
+                  <small class="text-muted mx-auto">{{ round this.FAT.quantity}}</small>
+                </div>
+                <div class="d-flex flex-column rounded shadow mr-1">
+                  <span class="badge badge-danger">saturates</span>
+                  <small class="text-muted mx-auto">{{ round this.FASAT.quantity}}g</small>
+                </div>
+                <div class="d-flex flex-column rounded shadow mr-1">
+                  <span class="badge badge-danger">carbs</span>
+                  <small class="text-muted mx-auto">{{ round this.CHOCDF.quantity}}g</small>
+                </div>
+                <div class="d-flex flex-column rounded shadow mr-1">
+                  <span class="badge badge-danger">sugar</span>
+                  <small class="text-muted mx-auto">{{ round this.SUGAR.quantity}}g</small>
+                </div>
+                <div class="d-flex flex-column rounded shadow mr-1">
+                  <span class="badge badge-danger">fibre</span>
+                  <small class="text-muted mx-auto">{{ round this.FIBTG.quantity}}g</small>
+                </div>
+                <div class="d-flex flex-column rounded shadow mr-1">
+                  <span class="badge badge-danger">protein</span>
+                  <small class="text-muted mx-auto">{{ round this.PROCNT.quantity}}g</small>
+                </div>
+                <div class="d-flex flex-column rounded shadow">
+                  <span class="badge badge-danger">sodium</span>
+                  <small class="text-muted mx-auto">{{ round this.NA.quantity}}mg</small>
+                </div>
+              </div>
+            {{/with}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-3 mx-4">
+    <div class="card-body">
+      <h5 class="card-title">Ingredients</h5>
+      <div class="mb-5">
+        {{#each recipe.ingredients}}
+          <p class="m-1">{{text}}</p>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <div class="card w-75 mx-auto m-5 shadow-none recipe">
   <div class="row m-0 mt-5 justify-content-center">
     <img src="{{ recipe.image }}" class="col-lg-4 p-0 m-3 float-left" alt="..."
@@ -40,13 +154,7 @@
             <a class="btn btn-primary mt-5 mr-5" target="_blank" href="{{recipe.url}}">View Recipe <span
                 class="fa fa-external-link"></span></a>
 
-            {{#if recipe.isSaved}}
-            <button class="recipe-bookmark btn btn-warning mt-5 ml-5" data-recipe-uri="{{ getID recipe.uri }}"
-              data-recipe-data="{{getData recipe}}" id="btn-recipe-uri">Saved</button>
-            {{else}}
-            <button class="recipe-bookmark btn btn-secondary mt-5 ml-5" data-recipe-uri="{{ getID recipe.uri }}"
-              data-recipe-data="{{getData recipe}}">Save</button>
-            {{/if}}
+            
         </div>
       </div>
     </p>
@@ -122,6 +230,21 @@
               </small>
             </footer>
           </blockquote>
+
+          <div class="d-flex justify-content-start">
+            <div class="shadow rounded bg-white m-1">
+                <div class="row bg-danger text-white" style="max-width: 40px;">
+                  <small>Potassium</small>
+                </div>
+                <div class="row bg-white" style="max-width: 40px;">
+                  <small>100 g</small>
+                </div>
+              </div>
+            {{#each recipe.totalNutrients}}
+              
+            {{/each}}
+          </div>
+
 
           <div class="">
             <p class="card-text m-1 border-bottom"><small class="text-muted">Health Labels</small></p>
