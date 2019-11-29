@@ -110,7 +110,7 @@
       <div class="row justify-content-center mt-3 mb-3">
         <div class="col-12 mt-3">
           {{#if user}}
-          <h5>Private Notes</h5>
+          <h5 class="card-title">Private Notes</h5>
           <div class="social-actions-comments">
             <button type="button" class="btn btn-primary new-private-note" data-recipe-uri="{{ getID recipe.uri }}"
               data-recipe-data="{{getData recipe }}">New Private Note</button>
@@ -131,7 +131,7 @@
 
       <div class="row mb-3">
         <div class="col">
-          <h5>Comments</h5>
+          <h5 class="card-title">Comments</h5>
           <div class="social-actions-comments mb-4">
             <button type="button" class="btn btn-primary new-comment" data-recipe-uri="{{ getID recipe.uri }}"
               data-recipe-data="{{getData recipe }}">New Comment</button>
