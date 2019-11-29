@@ -202,11 +202,11 @@
 
       const uri = e.target.dataset.recipeUri;
       const $commentForm = document.createElement("div");
-      $commentForm.classList.add("form-group", "comment-form");
+      $commentForm.classList.add("form-group", "comment-form", "my-3");
       $commentForm.innerHTML = `
           <textarea class="form-control" name="body" id="" cols="30" rows="3"></textarea>
-          <button class="btn btn-primary submit-comment" id="commentTo_${uri}">Submit</button>
-          <button class="btn btn-dark cancel-comment">Cancel</button>
+          <button class="btn btn-primary submit-comment mt-2" id="commentTo_${uri}">Submit</button>
+          <button class="btn btn-dark cancel-comment mt-2">Cancel</button>
         `;
       e.target.parentNode.append($commentForm);
     } else if (e.target.classList.contains("submit-comment")) {
