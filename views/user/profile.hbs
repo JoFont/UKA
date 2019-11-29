@@ -20,8 +20,7 @@
                             <img src="{{this.data.image}}" class="card-img-top" alt="Recipe Image" style="max-height: 200px; object-fit: cover;">
                             <div class="card-body">
                                 <h5 class="card-title">{{this.data.label}}</h5>
-                                <form action="/recipes/{{ getID this.data.uri }}" method="POST" class="d-inline">
-                                    <input class="hidden" type="text" name="data" value="{{getData this.data}}" />
+                                <form action="/recipes/{{ getID this.data.uri }}" method="GET" class="d-inline">
                                     <button class="btn btn-primary">View Recipe</button>
                                 </form>
                                 <div class="d-flex justify-content-between align-items-center mx-3 mt-1">
