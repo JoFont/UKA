@@ -1,36 +1,41 @@
 
 <div class="container mt-5 pt-3">
   <form id="recipe-search" class="w-100 mt-5 pt-4" action="/recipes" method="GET">
-    <div class="w-100 d-flex flex-row flex-wrap justisfy-content-between align-items-center">
-      <input type="text" class="border rounded w-50 mr-3 p-2" name="include" 
-      {{#if includes}}
-        placeholder=" {{#with includes}}{{ this }}{{/with}}" />
-      {{else}}
-        placeholder="Enter your ingredients..." required />
-      {{/if}}
-
-      <div class="custom-control custom-checkbox m-3">
-        <input type="checkbox" class="custom-control-input" id="customCheck1" name="strict" />
-        <label class="custom-control-label" for="customCheck1">Only these ingredients</label>
+    <div class="row w-100 d-flex flex-row flex-wrap justisfy-content-between align-items-center">
+      <div class="mb-2 col-sm-12 col-md-6 d-flex flex-row">
+        <input type="text" class="border rounded p-2 w-100" name="include" 
+        {{#if includes}}
+          placeholder=" {{#with includes}}{{ this }}{{/with}}" />
+        {{else}}
+          placeholder="Enter your ingredients..." required />
+        {{/if}}
       </div>
+      <div class="m-3 mr-2 col-sm-12 col-md-2 d-flex flex-row justify-content-center">
+        <div class="custom-control custom-checkbox"> 
+          <input type="checkbox" class="custom-control-input" id="customCheck1" name="strict" />
+          <label class="custom-control-label" for="customCheck1">Only these</label>
+        </div>
+      </div>
+      <div class="m-2 col-md-3 d-flex justify-content-center align-items-center">
+        <button class="mr-5 btn btn-success">Search</button>
 
-      <button class="btn btn-success m-3">Search</button>
-
-      {{!-- ADVANCED SEARCH --}}
-      <a class="ml-3" data-toggle="collapse" href="#advanced" role="button" aria-expanded="false"
-        aria-controls="collapseExample">
-        Advanced</a>
+        {{!-- ADVANCED SEARCH --}}
+        <a class="mt-2 mb-2" data-toggle="collapse" href="#advanced" role="button" aria-expanded="false"
+          aria-controls="collapseExample">
+          Advanced
+        </a>
+      </div>
     </div>
 
     <div class="collapse card card-body w-100" id="advanced">
       <div class="col">
         <div class="form-group row">
           <div class="col-md-6">
-            <label class="w-25" for="max-ingredients">Max number of ingredients</label>
+            <label class="w-25" for="max-ingredients">Max ingredients</label>
             <input class="w-100" type="number" id="max-ingredients" name="max"/>
           </div>
           <div class="col-md-6">
-            <label class="w-25" for="exclude">Exclude these ingredients</label>
+            <label class="w-25" for="exclude">Exclude these</label>
             <input class="w-100" type="text" name="exclude" id="exclude" />
           </div>
           <hr />
