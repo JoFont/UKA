@@ -20,7 +20,7 @@
     <p class="card-text">
       <div class="row">
         <div class="col-lg-4">
-          <ul class="list-group text-wrap">
+          <ul class="list-group text-wrap w-100 m-2">
             {{#each recipe.healthLabels}}
             <li class="list-group-item list-group-item-success text-center">{{ this }}</li>
             {{/each}}
@@ -28,7 +28,7 @@
         </div>
         <div class="col-lg-7">
           <div class="d-flex flex-column align-items-center ingredients">
-            <div class="mx-auto">
+            <div class="ml-5 mr-5">
               <p class="font-weight-bold mb-3">Ingredients</p>
               <ul style="font-style: italic;">
                 {{#each recipe.ingredients}}

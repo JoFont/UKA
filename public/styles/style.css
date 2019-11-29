@@ -1,0 +1,240 @@
+body {
+  margin: 0;
+  padding: 2em 0 0 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 100%;
+  height: 100vh;
+  background-color: #ecefea; }
+
+a {
+  color: #00b7ff; }
+
+.logo {
+  width: 100%;
+  height: auto; }
+
+.restrictions {
+  margin: 0.1em 0.5em; }
+
+@media (min-width: 990px) and (orientation: landscape) {
+  .navbar {
+    max-height: 3.5em; }
+  body {
+    padding: 0; } }
+
+@media (max-width: 990px) {
+  .ingredients {
+    margin-top: 2.5em; }
+  .ingredients .font-weight-bold {
+    font-size: 1.5em;
+    margin-left: 1em; } }
+
+.btn-green {
+  background-color: #5cb85c;
+  border-color: #5cb85c; }
+
+#index, .fs-bg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Use "linear-gradient" to add a darken background effect to the image. This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./../images/index-bg.jpg");
+  /* Set a specific height */
+  height: 100%;
+  width: 100%;
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative; }
+  #index h1, #index h2, #index form, .fs-bg h1, .fs-bg h2, .fs-bg form {
+    color: white;
+    line-height: 1em; }
+  #index h1, .fs-bg h1 {
+    font-size: 5em;
+    padding: 1em; }
+  #index .auth-form, .fs-bg .auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  #index form, .fs-bg form {
+    margin: 1.5em 0; }
+  #index form button, .fs-bg form button {
+    font-weight: 600;
+    margin: 1em 0.5em; }
+  #index .card-title, .fs-bg .card-title {
+    text-align: center;
+    font-size: 2em; }
+
+.ingredients {
+  font-size: 1.25em; }
+  .ingredients ul {
+    list-style-type: circle; }
+
+.google-button {
+  height: 40px;
+  border-width: 0;
+  background: white;
+  color: #737373;
+  border-radius: 5px;
+  white-space: nowrap;
+  box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.05);
+  transition-property: background-color, box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+  padding: 0;
+  width: 99.6%; }
+  .google-button:focus, .google-button:hover {
+    box-shadow: 1px 4px 5px 1px rgba(0, 0, 0, 0.1); }
+  .google-button:active {
+    background-color: #e5e5e5;
+    box-shadow: none;
+    transition-duration: 10ms; }
+
+.google-button__icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 8px 0 8px 8px;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box; }
+
+.google-button__icon--plus {
+  width: 27px; }
+
+.google-button__text {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 24px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Roboto',arial,sans-serif; }
+
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .search div {
+    margin: 1em;
+    padding: 0.25em; }
+  .search input {
+    padding: 0.5em;
+    border: 0.3em solid white;
+    border-radius: 0.3em; }
+  .search label {
+    margin-left: 1.5em; }
+  .search button {
+    margin: 2em;
+    margin-top: 5em; }
+
+.bg-purple {
+  background-color: #d3d0d8; }
+
+.profile-pic {
+  max-width: 50px;
+  border-radius: 50%; }
+
+.pristine-error {
+  color: red; }
+
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: .5; }
+  .hr-text:before {
+    content: '';
+    background: linear-gradient(to right, transparent, #818078, transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px; }
+  .hr-text:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    color: black;
+    padding: 0 .5em;
+    line-height: 1.5em;
+    color: #818078;
+    background-color: #ecefea; }
+
+.cursor {
+  cursor: pointer; }
+
+.hidden {
+  display: none; }
+
+.recipe .card-title {
+  font-family: 'Libre Baskerville', serif; }
+
+.recipe .card-body {
+  font-family: 'Source Sans Pro', sans-serif; }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0); }
+  100% {
+    opacity: 1;
+    transform: none; } }
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0); }
+  100% {
+    opacity: 1;
+    transform: none; } }
+
+.m-scene {
+  /** Basic styles for an animated element */
+  /** An element that fades in */
+  /** An element that fades in and slides up */
+  /** An element that fades in and slides from the right */ }
+  .m-scene .scene_element {
+    animation-duration: 1.5s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both; }
+  .m-scene .scene_element_fast {
+    animation-duration: 0.3s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both; }
+  .m-scene .scene_element--fadein {
+    animation-name: fadeIn; }
+  .m-scene .scene_element--fadeinup {
+    animation-name: fadeInUp; }
+  .m-scene .scene_element--fadeinright {
+    animation-name: fadeInRight; }
+
+.btn-uka-fill {
+  background-color: #5cb85c; }
+
+.btn-uka-border {
+  border-color: #5cb85c; }
+
+.bg-uka-light {
+  background-color: #EFEEEA; }
+
+input.transparent-input {
+  background-color: rgba(70, 70, 70, 0.7) !important;
+  border: none !important;
+  width: 30vw;
+  height: 40px; }
+
+input.transparent-input::placeholder {
+  color: rgba(255, 255, 255, 0.7); }
+
+/*# sourceMappingURL=style.css.map */
