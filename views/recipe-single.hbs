@@ -53,42 +53,42 @@
             </div>
             
             <hr class="m-0 mb-2">
-            <div class="d-flex justify-content-start align-items-center mt-3 mb-3">
+            <div class="d-flex flex-wrap justify-content-start align-items-center">
               {{#each recipe.healthLabels}}
-                <span class="badge badge-success mr-1">{{this}}</span>
+                <span class="badge badge-success m-2">{{this}}</span>
               {{/each}}
             </div>
             {{#with recipe.totalNutrients}}
-              <div class="d-flex justify-content-start mt-3 mb-3">
-                <div class="d-flex flex-column rounded shadow mr-1">
+              <div class="d-flex flex-wrap justify-content-start">
+                <div class="d-flex flex-column rounded shadow m-2">
                   <span class="badge badge-danger">kcal</span>
                   <small class="text-muted mx-auto">{{ round this.ENERC_KCAL.quantity}}</small>
                 </div>
-                <div class="d-flex flex-column rounded shadow mr-1">
+                <div class="d-flex flex-column rounded shadow m-2">
                   <span class="badge badge-danger">fat</span>
                   <small class="text-muted mx-auto">{{ round this.FAT.quantity}}</small>
                 </div>
-                <div class="d-flex flex-column rounded shadow mr-1">
+                <div class="d-flex flex-column rounded shadow m-2">
                   <span class="badge badge-danger">saturates</span>
                   <small class="text-muted mx-auto">{{ round this.FASAT.quantity}}g</small>
                 </div>
-                <div class="d-flex flex-column rounded shadow mr-1">
+                <div class="d-flex flex-column rounded shadow m-2">
                   <span class="badge badge-danger">carbs</span>
                   <small class="text-muted mx-auto">{{ round this.CHOCDF.quantity}}g</small>
                 </div>
-                <div class="d-flex flex-column rounded shadow mr-1">
+                <div class="d-flex flex-column rounded shadow m-2">
                   <span class="badge badge-danger">sugar</span>
                   <small class="text-muted mx-auto">{{ round this.SUGAR.quantity}}g</small>
                 </div>
-                <div class="d-flex flex-column rounded shadow mr-1">
+                <div class="d-flex flex-column rounded shadow m-2">
                   <span class="badge badge-danger">fibre</span>
                   <small class="text-muted mx-auto">{{ round this.FIBTG.quantity}}g</small>
                 </div>
-                <div class="d-flex flex-column rounded shadow mr-1">
+                <div class="d-flex flex-column rounded shadow m-2">
                   <span class="badge badge-danger">protein</span>
                   <small class="text-muted mx-auto">{{ round this.PROCNT.quantity}}g</small>
                 </div>
-                <div class="d-flex flex-column rounded shadow">
+                <div class="d-flex flex-column rounded shadow m-2">
                   <span class="badge badge-danger">sodium</span>
                   <small class="text-muted mx-auto">{{ round this.NA.quantity}}mg</small>
                 </div>
