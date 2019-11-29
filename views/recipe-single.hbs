@@ -1,7 +1,7 @@
 <div class="card w-75 mx-auto m-5 shadow-none recipe">
   <div class="row justify-content-center">
     <img src="{{ recipe.image }}" class="col-md-4 p-0 m-0 ml-3 mr-3 mt-5 float-left" alt="..."
-      style="max-height: 200px; object-fit: cover; border: 0.16em solid rgba(230, 232, 230, 0.4); border-radius: 0.75em;">
+      style="max-height: 200px; object-fit: cover; border: 0.16em solid rgba(230, 232, 230, 0.4); border-radius: 0.5em;">
     <div class="col-md-7">
       <h3 class="card-title p-2 pl-5 mt-5 mb-4">{{ recipe.label }}</h3>
       {{#if recipe.totalTime}}
@@ -17,7 +17,7 @@
     <p class="card-text">
       <div class="row">
         <div class="col-md-4">
-          <ul class="list-group text-wrap p-0 ml-5 w-75">
+          <ul class="list-group text-wrap p-0 ml-5 mb-3 w-75">
             {{#each recipe.healthLabels}}
             <li class="ml-3 list-group-item list-group-item-success text-center">{{ this }}</li>
             {{/each}}
@@ -48,10 +48,10 @@
 
     {{!-- NOTES & COMMENTS --}}
     <div class="container border mt-5">
-      <div class="row justify-content-center">
-        <div class="col-12">
+      <div class="row justify-content-center mt-3 mb-3">
+        <div class="col-12 mt-3">
           {{#if user}}
-          <h4 class="mt-3">Private Notes</h4>
+          <h4>Private Notes</h4>
           <div class="social-actions-comments">
             <button type="button" class="btn btn-primary new-private-note" data-recipe-uri="{{ getID recipe.uri }}"
               data-recipe-data="{{getData recipe }}">New Private Note</button>
@@ -70,21 +70,25 @@
         </div>
       </div>
 
-      <h4>Comments</h4>
-      <div class="social-actions-comments">
-        <button type="button" class="btn btn-primary new-comment" data-recipe-uri="{{ getID recipe.uri }}"
-          data-recipe-data="{{getData recipe }}">New Comment</button>
-      </div>
-      <div class="comments-container">
-        {{#each comments}}
-        <div class="media mb-2">
-          <img src="{{this.author.photoUrl}}" class="mr-3 rounded-circle" alt="..." style="max-width: 40px;">
-          <div class="media-body">
-            <h5 class="mt-0 mb-0">{{this.author.displayName}}</h5>
-            {{this.body}}
+      <div class="row mb-3">
+        <div class="col">
+          <h4>Comments</h4>
+          <div class="social-actions-comments">
+            <button type="button" class="btn btn-primary new-comment" data-recipe-uri="{{ getID recipe.uri }}"
+              data-recipe-data="{{getData recipe }}">New Comment</button>
+          </div>
+          <div class="comments-container">
+            {{#each comments}}
+            <div class="media mb-2">
+              <img src="{{this.author.photoUrl}}" class="mr-3 rounded-circle" alt="..." style="max-width: 40px;">
+              <div class="media-body">
+                <h5 class="mt-0 mb-0">{{this.author.displayName}}</h5>
+                {{this.body}}
+              </div>
+            </div>
+            {{/each}}
           </div>
         </div>
-        {{/each}}
       </div>
 
       {{else}}

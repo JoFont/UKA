@@ -47,7 +47,7 @@ router.get('/', async (req, res, next) => {
       break;
     }
 
-    console.log(req.query.restrictions);
+    // console.log('Includes: ', req.query.include);
     
     try {
         const response = await axios.get(`https://api.edamam.com/search`, {
@@ -106,7 +106,7 @@ router.get('/', async (req, res, next) => {
             results.push(hit);
         });
 
-        res.render("recipes", {recipes: results});
+        res.render("recipes", {recipes: results, includes: req.query.include});
     } catch (error) {
         res.send(new Error(error))
     }

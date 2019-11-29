@@ -3,7 +3,7 @@ $link-color: #00b7ff;
 
 body {
   margin: 0;
-  padding: 0;
+  padding: 2em 0 0 0;
   font-family: $font-sans;
   width: 100%;
   height: 100vh;
@@ -23,9 +23,12 @@ a {
   margin: 0.1em 0.5em;
 }
 
-@media (min-width: 1280px) and (orientation: landscape) { 
+@media (min-width: 990px) and (orientation: landscape) { 
   .navbar {
     max-height: 3.5em;
+  }
+  body {
+    padding: 0;
   }
 }
 
