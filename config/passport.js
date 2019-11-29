@@ -81,7 +81,7 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
         to: `${email}`,
         subject: 'UKA - Confirm Your Email',
         text: `Welcome to UKA. Go to 
-        http://localhost:3000/auth/confirm/${token} 
+        http://uka.recipes/auth/confirm/${token} 
         to confirm your email address`,
         html: htmlEmail
       });
