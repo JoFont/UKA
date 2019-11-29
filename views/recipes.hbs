@@ -1,4 +1,5 @@
-<div class="container">
+
+<div class="container bg-uka-light">
   <form id="recipe-search" class="w-100 mt-5 pt-4" action="/recipes" method="GET">
     <div class="w-100 d-flex flex-row flex-wrap justisfy-content-between align-items-center">
       <input type="text" class="border rounded w-50 mr-3 p-2" name="include" 
@@ -122,10 +123,10 @@
   </form>
 </div>
 
-<div class="container">
-  <div class="card-columns mt-5">
+<div class="container bg-uka-light">
+  <div class="card-columns mt-5 m-scene">
     {{#each recipes}}
-    <div class="card">
+    <div class="card scene_element scene_element--fadein">
       <img src="{{ recipe.image }}" class="card-img-top" alt="" style="max-height: 200px; object-fit: cover;">
       <div class="card-body">
         <h5 class="card-title">{{ recipe.label }}</h5>
@@ -165,30 +166,36 @@
 </div>
 
 <script>
+
   document.addEventListener('click', e => {
     if (e.target.classList.contains('recipe-bookmark')) {
-      //JSON - change value - stringify -
-      const uri = e.target.dataset.recipeUri;
-      const data = e.target.dataset.recipeData;
+      {{#if user}}
+        //JSON - change value - stringify -
+        const uri = e.target.dataset.recipeUri;
+        const data = e.target.dataset.recipeData;
 
-      axios.post(`/recipes/${uri}/save`, { data: data }).then(res => {
-        const data = res.data;
-        if (data.status === 200 && data.saved) {
-          const dataTmp = JSON.parse(e.target.dataset.recipeData);
-          dataTmp.isSaved = true;
-          e.target.setAttribute("data-recipe-data", JSON.stringify(dataTmp));
-          e.target.classList.remove("btn-secondary");
-          e.target.innerText = "Saved";
-          e.target.classList.add("btn-warning");
-        } else if (data.status === 200 && !data.saved) {
-          const dataTmp = JSON.parse(e.target.dataset.recipeData);
-          dataTmp.isSaved = false;
-          e.target.dataset.recipeData = JSON.stringify(dataTmp);
-          e.target.classList.remove("btn-warning");
-          e.target.innerText = "Save";
-          e.target.classList.add("btn-secondary");
-        }
-      });
+        axios.post(`/recipes/${uri}/save`, { data: data }).then(res => {
+          const data = res.data;
+          if (data.status === 200 && data.saved) {
+            const dataTmp = JSON.parse(e.target.dataset.recipeData);
+            dataTmp.isSaved = true;
+            e.target.setAttribute("data-recipe-data", JSON.stringify(dataTmp));
+            e.target.classList.remove("btn-secondary");
+            e.target.innerText = "Saved";
+            e.target.classList.add("btn-warning");
+          } else if (data.status === 200 && !data.saved) {
+            const dataTmp = JSON.parse(e.target.dataset.recipeData);
+            dataTmp.isSaved = false;
+            e.target.dataset.recipeData = JSON.stringify(dataTmp);
+            e.target.classList.remove("btn-warning");
+            e.target.innerText = "Save";
+            e.target.classList.add("btn-secondary");
+          }
+        });
+      {{else}}
+        window.location.href = "/auth/sign-in";
+      {{/if}}
+      
     }
   });
 </script>

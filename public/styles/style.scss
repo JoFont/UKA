@@ -1,6 +1,10 @@
 $font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $link-color: #00b7ff;
 
+$dark: #302C2C;
+$light: #EFEEEA;
+$green: #5cb85c;
+
 body {
   margin: 0;
   padding: 2em 0 0 0;
@@ -31,6 +35,15 @@ a {
     padding: 0;
   }
 }
+
+@media (max-width: 990px) { 
+  .ingredients { 
+    margin-top: 2.5em;
+  } .ingredients .font-weight-bold {
+    font-size: 1.5em;
+    margin-left: 1em;
+  }
+};
 
 .btn-green {
   background-color: #5cb85c;
@@ -84,6 +97,13 @@ a {
   .card-title {
     text-align: center;
     font-size: 2em;
+  }
+}
+
+.ingredients {
+  font-size: 1.25em;
+  ul {
+    list-style-type: circle;
   }
 }
 
@@ -216,10 +236,92 @@ a {
   display: none;
 }
 
+// #recipe-search {
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-around;
+  // align-items: center;
+  // justify-content: center;
+// }
+
 .recipe .card-title {
   font-family: 'Libre Baskerville', serif;
 }
 
 .recipe .card-body {
   font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.m-scene {
+  /** Basic styles for an animated element */
+  .scene_element {
+    animation-duration: 1.5s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both;
+
+  }
+
+  /** An element that fades in */
+  .scene_element--fadein {
+    animation-name: fadeIn;
+  }
+
+  /** An element that fades in and slides up */
+  .scene_element--fadeinup {
+    animation-name: fadeInUp;
+  }
+
+  /** An element that fades in and slides from the right */
+  .scene_element--fadeinright {
+    animation-name: fadeInRight;
+  }
+}
+
+
+.btn-uka-fill {
+  background-color: $green;
+}
+
+.btn-uka-border {
+  border-color: $green;
+}
+
+.bg-uka-light {
+  background-color: $light;
 }

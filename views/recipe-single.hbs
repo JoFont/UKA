@@ -1,36 +1,42 @@
 <div class="card w-75 mx-auto m-5 shadow-none recipe">
-  <div class="row justify-content-center">
-    <img src="{{ recipe.image }}" class="col-md-4 p-0 m-0 ml-3 mr-3 mt-5 float-left" alt="..."
+  <div class="row m-0 mt-5 justify-content-center">
+    <img src="{{ recipe.image }}" class="col-lg-4 p-0 m-3 float-left" alt="..."
       style="max-height: 200px; object-fit: cover; border: 0.16em solid rgba(230, 232, 230, 0.4); border-radius: 0.5em;">
-    <div class="col-md-7">
-      <h3 class="card-title p-2 pl-5 mt-5 mb-4">{{ recipe.label }}</h3>
-      {{#if recipe.totalTime}}
-      <span class="pl-5 pt-5 mt-5 font-weight-bold">Total time: {{recipe.totalTime}} minutes</span>
-      {{/if}}
+    <div class="col-lg-7 m-3">
 
-      {{#if recipe.yield}}
-      <span class="pl-5 pt-5 mt-5 font-weight-bold">Servings: {{recipe.yield}}</span>
-      {{/if}}
+      <h3 class="card-title mb-5">{{ recipe.label }}</h3>
+      <div class="d-flex justify-content-between">
+        {{#if recipe.totalTime}}
+        <span class="font-weight-bold text-left">Total time: {{recipe.totalTime}} minutes</span>
+        {{/if}}
+
+        {{#if recipe.yield}}
+        <span class="font-weight-bold text-right">Servings: {{recipe.yield}}</span>
+        {{/if}}
+      </div>
     </div>
   </div>
   <div class="card-body text-wrap">
     <p class="card-text">
       <div class="row">
-        <div class="col-md-4">
-          <ul class="list-group text-wrap p-0 ml-5 mb-3 w-75">
+        <div class="col-lg-4">
+          <ul class="list-group text-wrap">
             {{#each recipe.healthLabels}}
-            <li class="ml-3 list-group-item list-group-item-success text-center">{{ this }}</li>
+            <li class="list-group-item list-group-item-success text-center">{{ this }}</li>
             {{/each}}
           </ul>
         </div>
-        <div class="col-md-7">
-          <div class="pl-5 ml-5">
-            <span class="font-weight-bold">Ingredients</span>
-            <ul>
-              {{#each recipe.ingredients}}
-              <li>{{text}}</li>
-              {{/each}}
-            </ul>
+        <div class="col-lg-7">
+          <div class="d-flex flex-column align-items-center ingredients">
+            <div>
+              <p class="font-weight-bold mb-3">Ingredients</p>
+              <ul style="font-style: italic;">
+                {{#each recipe.ingredients}}
+                <li>{{text}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
             <a class="btn btn-primary mt-5 mr-5" target="_blank" href="{{recipe.url}}">View Recipe <span
                 class="fa fa-external-link"></span></a>
 
@@ -41,7 +47,6 @@
             <button class="recipe-bookmark btn btn-secondary mt-5 ml-5" data-recipe-uri="{{ getID recipe.uri }}"
               data-recipe-data="{{getData recipe}}">Save</button>
             {{/if}}
-          </div>
         </div>
       </div>
     </p>
