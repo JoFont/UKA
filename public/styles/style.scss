@@ -5,6 +5,24 @@ $dark: #302C2C;
 $light: #EFEEEA;
 $green: #5cb85c;
 
+@media (min-width: 990px) and (orientation: landscape) { 
+  .navbar {
+    max-height: 3.5em;
+  }
+  body {
+    padding: 0;
+  }
+}
+
+@media (max-width: 990px) { 
+  .ingredients { 
+    margin-top: 2.5em;
+  } .ingredients .font-weight-bold {
+    font-size: 1.5em;
+    margin-left: 1em;
+  }
+};
+
 body {
   margin: 0;
   padding: 2em 0 0 0;
@@ -27,23 +45,6 @@ a {
   margin: 0.1em 0.5em;
 }
 
-@media (min-width: 990px) and (orientation: landscape) { 
-  .navbar {
-    max-height: 3.5em;
-  }
-  body {
-    padding: 0;
-  }
-}
-
-@media (max-width: 990px) { 
-  .ingredients { 
-    margin-top: 2.5em;
-  } .ingredients .font-weight-bold {
-    font-size: 1.5em;
-    margin-left: 1em;
-  }
-};
 
 .btn-green {
   background-color: #5cb85c;

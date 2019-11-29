@@ -19,7 +19,7 @@
           </div>
 
           <div class="recipe-info">
-            <div class="row">
+            <div class="row pb-4">
               <div class="col">
                 {{#if recipe.totalTime}}
                   <h6 class="m-0">Total time: <strong>{{recipe.totalTime}} minutes</strong></h6>
@@ -54,13 +54,13 @@
             </div>
             
             <hr class="m-0 mb-2">
-            <div class="d-flex justify-content-start align-items-center mb-2">
+            <div class="d-flex justify-content-start align-items-center mt-3 mb-3">
               {{#each recipe.healthLabels}}
                 <span class="badge badge-success mr-1">{{this}}</span>
               {{/each}}
             </div>
             {{#with recipe.totalNutrients}}
-              <div class="d-flex justify-content-start">
+              <div class="d-flex justify-content-start mt-3 mb-3">
                 <div class="d-flex flex-column rounded shadow mr-1">
                   <span class="badge badge-danger">kcal</span>
                   <small class="text-muted mx-auto">{{ round this.ENERC_KCAL.quantity}}</small>
