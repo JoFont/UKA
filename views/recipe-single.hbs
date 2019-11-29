@@ -17,7 +17,6 @@
               </footer>
             </blockquote>
           </div>
-
           <div class="recipe-info">
             <div class="row">
               <div class="col">
@@ -108,6 +107,52 @@
           <p class="m-1">{{text}}</p>
         {{/each}}
       </div>
+      <div class="row justify-content-center mt-3 mb-3">
+        <div class="col-12 mt-3">
+          {{#if user}}
+          <h5>Private Notes</h5>
+          <div class="social-actions-comments">
+            <button type="button" class="btn btn-primary new-private-note" data-recipe-uri="{{ getID recipe.uri }}"
+              data-recipe-data="{{getData recipe }}">New Private Note</button>
+          </div>
+
+          <div class="notes-container p-2">
+            {{#each notes }}
+            <div class="card rounded shadow-none border-bottom">
+              <div class="card-body rounded p-1">
+                <p class="card-text" contenteditable="true">{{body}}</p>
+                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <h5>Comments</h5>
+          <div class="social-actions-comments mb-4">
+            <button type="button" class="btn btn-primary new-comment" data-recipe-uri="{{ getID recipe.uri }}"
+              data-recipe-data="{{getData recipe }}">New Comment</button>
+          </div>
+          <div class="comments-container">
+            {{#each comments}}
+            <div class="media mb-2">
+              <img src="{{this.author.photoUrl}}" class="mr-3 rounded-circle" alt="..." style="max-width: 40px;">
+              <div class="media-body">
+                <h5 class="mt-0 mb-0">{{this.author.displayName}}</h5>
+                {{this.body}}
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+
+      {{else}}
+      <p class="text-center pt-4">Please Sign In to Comment</p>
+      {{/if}}
     </div>
   </div>
 </div>
@@ -115,55 +160,7 @@
 
 
 {{!-- NOTES & COMMENTS --}}
-  <div class="container border mt-5">
-    <div class="row justify-content-center mt-3 mb-3">
-      <div class="col-12 mt-3">
-        {{#if user}}
-        <h4>Private Notes</h4>
-        <div class="social-actions-comments">
-          <button type="button" class="btn btn-primary new-private-note" data-recipe-uri="{{ getID recipe.uri }}"
-            data-recipe-data="{{getData recipe }}">New Private Note</button>
-        </div>
-
-        <div class="notes-container p-2">
-          {{#each notes }}
-          <div class="card rounded shadow-none border-bottom">
-            <div class="card-body rounded p-1">
-              <p class="card-text" contenteditable="true">{{body}}</p>
-              <button type="button" class="btn btn-danger btn-sm">Delete</button>
-            </div>
-          </div>
-          {{/each}}
-        </div>
-      </div>
-    </div>
-
-    <div class="row mb-3">
-      <div class="col">
-        <h4>Comments</h4>
-        <div class="social-actions-comments">
-          <button type="button" class="btn btn-primary new-comment" data-recipe-uri="{{ getID recipe.uri }}"
-            data-recipe-data="{{getData recipe }}">New Comment</button>
-        </div>
-        <div class="comments-container">
-          {{#each comments}}
-          <div class="media mb-2">
-            <img src="{{this.author.photoUrl}}" class="mr-3 rounded-circle" alt="..." style="max-width: 40px;">
-            <div class="media-body">
-              <h5 class="mt-0 mb-0">{{this.author.displayName}}</h5>
-              {{this.body}}
-            </div>
-          </div>
-          {{/each}}
-        </div>
-      </div>
-    </div>
-
-    {{else}}
-    <p class="text-center pt-4">Please Sign In to Comment</p>
-    {{/if}}
-
-  </div>
+  
 
 
 
