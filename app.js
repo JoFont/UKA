@@ -28,6 +28,11 @@ hbs.registerHelper("getData", function (data) {
   return `${dataStr}`;
 })
 
+var helpers = require('handlebars-helpers');
+var math = helpers.math({
+  handlebars: hbs
+});
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
