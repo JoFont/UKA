@@ -297,6 +297,12 @@ a {
 
   }
 
+  .scene_element_fast {
+    animation-duration: 0.3s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both;
+
+  }
   /** An element that fades in */
   .scene_element--fadein {
     animation-name: fadeIn;
