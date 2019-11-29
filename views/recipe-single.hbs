@@ -1,3 +1,46 @@
+
+<div class="container mt-5 pt-5">
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="{{ recipe.image }}" class="card-img" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body h-100">
+          <h5 class="card-title mb-1">{{ recipe.label }}</h5>
+          <blockquote class="blockquote p-0 m-0 mb-3">
+            <footer class="blockquote-footer">
+              <small class="text-muted">
+                from <cite title="Source Title">{{ recipe.source }}</cite>
+              </small>
+            </footer>
+          </blockquote>
+
+          {{#with recipe.totalNutrients}}
+            <div class="d-flex justify-content-start">
+              <div class="d-flex flex-column rounded shadow">
+                <span class="badge badge-danger">kcal</span>
+                <small class="text-muted mx-auto">100g</small>
+              </div>
+            </div>
+          {{/with}}
+
+          <div class="">
+            <p class="card-text m-1 border-bottom"><small class="text-muted">Health Labels</small></p>
+            <div class="d-flex justify-content-start align-items-center">
+              {{#each recipe.healthLabels}}
+                <span class="badge badge-success m-1">{{this}}</span>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <div class="card w-75 mx-auto m-5 shadow-none recipe">
   <div class="row m-0 mt-5 justify-content-center">
     <img src="{{ recipe.image }}" class="col-lg-4 p-0 m-3 float-left" alt="..."
@@ -122,6 +165,21 @@
               </small>
             </footer>
           </blockquote>
+
+          <div class="d-flex justify-content-start">
+            <div class="shadow rounded bg-white m-1">
+                <div class="row bg-danger text-white" style="max-width: 40px;">
+                  <small>Potassium</small>
+                </div>
+                <div class="row bg-white" style="max-width: 40px;">
+                  <small>100 g</small>
+                </div>
+              </div>
+            {{#each recipe.totalNutrients}}
+              
+            {{/each}}
+          </div>
+
 
           <div class="">
             <p class="card-text m-1 border-bottom"><small class="text-muted">Health Labels</small></p>
