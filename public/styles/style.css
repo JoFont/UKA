@@ -224,4 +224,13 @@ a {
 .bg-uka-light {
   background-color: #EFEEEA; }
 
+input.transparent-input {
+  background-color: rgba(70, 70, 70, 0.7) !important;
+  border: none !important;
+  width: 30vw;
+  height: 40px; }
+
+input.transparent-input::placeholder {
+  color: rgba(255, 255, 255, 0.7); }
+
 /*# sourceMappingURL=style.css.map */
