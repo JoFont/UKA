@@ -76,7 +76,7 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
 
       // Send Email
       const htmlEmail = renderTemplate(__dirname + "/mail/verify-email.hbs", { newUser, token });
-      
+
       nodemailer.sendMail({
         from: `"Ultimate Kitchen Assistant" <${process.env.EMAIL_USER}>`,
         to: `${email}`,
@@ -86,7 +86,9 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
         to confirm your email address`,
         html: htmlEmail
       });
-
+      
+      
+      
       done(null, newUser);
 
     } catch (err) {
