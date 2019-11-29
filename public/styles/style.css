@@ -194,6 +194,10 @@ a {
     animation-duration: 1.5s;
     transition-timing-function: ease-in;
     animation-fill-mode: both; }
+  .m-scene .scene_element_fast {
+    animation-duration: 0.3s;
+    transition-timing-function: ease-in;
+    animation-fill-mode: both; }
   .m-scene .scene_element--fadein {
     animation-name: fadeIn; }
   .m-scene .scene_element--fadeinup {
