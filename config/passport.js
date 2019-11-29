@@ -87,9 +87,7 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async (email
       });
 
       done(null, newUser);
-      //console.log(newUser)
-      //req.session.user = newUser._id;
-      //console.log(req.session.user);
+
     } catch (err) {
       done(err);
     }
