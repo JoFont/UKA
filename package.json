@@ -8,7 +8,7 @@
     "dev:debug": "DEBUG=project-2* npm run dev"
   },
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.18.1",
     "connect-mongo": "^3.2.0",
